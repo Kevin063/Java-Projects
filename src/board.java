@@ -1,4 +1,4 @@
-package TTT;
+
 
 import java.util.Arrays;
 
@@ -6,10 +6,6 @@ public class board {
 private int width;
 private int height;
 private int[] grids;
-//Default setting with 3x3
-public board(){
-	this(3,3);
-}
 //Constructor
 public board(int a, int b) {
 	width=a;
@@ -17,7 +13,20 @@ public board(int a, int b) {
 	grids=new int[width*height];
 	Arrays.fill(grids, 0);//For clearance, actually don't need since the default is 0
 }
-
+public board() {
+	this(IO.readheight(),IO.readwidth());
+}
+public int getheight() {
+	return this.height;
+}
+public int gethwidth() {
+	return this.width;
+}
+//Reset the board to init state
+public void resetboard() {
+	grids=new int[width*height];
+	Arrays.fill(grids, 0);
+}
 //Build a line of the board grid outline,AKA,"+--+--+--+"
 private String build_line(){
 	String output="";
@@ -41,7 +50,7 @@ private String build_grid(int linenum) {
 				output+="X";
 				break;
 			case 3://For marking the winner combo
-				output+="¡î";
+				output+="*";
 				break;
 		}
 		output+=" ";
@@ -57,6 +66,13 @@ public String build_out() {
 		output+=build_grid(i)+"\n";
 	}
 	return output+build_line();
+}
+//Check whether the game is stalemate, here I use the simple way: whether all board grids are filled
+public boolean checkstalemate() {
+	for(int i = 0;i<grids.length;i++) {
+		if (grids[i]==0) return false;
+	}
+	return true;
 }
 //Validate whether the spot is taken yet
 public boolean vaild_action(action act) {
