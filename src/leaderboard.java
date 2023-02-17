@@ -20,6 +20,12 @@ public class leaderboard {
 			this.recordwinner(winner,gm);
 		}
 	}
+	public void recordplayer(String player) {
+		if (!leaderboard.containsKey(player)) {
+			player p=new player(player);
+			this.leaderboard.put(player, p);
+		}
+	}
 	public void printleaderboard() {
 		Iterator it=leaderboard.entrySet().iterator();
 		while(it.hasNext()) {

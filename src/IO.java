@@ -4,7 +4,7 @@ import java.util.Scanner;
 public abstract class IO {
 //Read input to choose a game
 	public static game readgame() {
-		System.out.print("Please choose your game from our game list!\n1.Tic Tac Toe");
+		System.out.print("Please choose your game from our game list!\n1.Tic Tac Toe\n");
 		Scanner s=new Scanner(System.in);
 		int input=s.nextInt();
 		if (input==1) {

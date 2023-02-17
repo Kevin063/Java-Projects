@@ -5,22 +5,30 @@ import java.util.Arrays;
 public class board {
 private int width;
 private int height;
+private int wincondition;
 private int[] grids;
 //Constructor
-public board(int a, int b) {
+public board(int a, int b,int wc) {
 	width=a;
 	height=b;
+	wincondition=wc;
 	grids=new int[width*height];
 	Arrays.fill(grids, 0);//For clearance, actually don't need since the default is 0
 }
 public board() {
-	this(IO.readheight(),IO.readwidth());
+	this(IO.readheight(),IO.readwidth(),IO.readwincondition());
 }
 public int getheight() {
 	return this.height;
 }
-public int gethwidth() {
+public int getwidth() {
 	return this.width;
+}
+public int getwincondition() {
+	return this.wincondition;
+}
+public int[] getgrids() {
+	return this.grids;
 }
 //Reset the board to init state
 public void resetboard() {
@@ -49,9 +57,11 @@ private String build_grid(int linenum) {
 			case 2:
 				output+="X";
 				break;
-			case 3://For marking the winner combo
+			case -1://For marking the winner combo
 				output+="*";
 				break;
+			default://Supporting the mutiple players
+				output+=grids[linenum*width+i];
 		}
 		output+=" ";
 	}
@@ -81,84 +91,53 @@ public boolean vaild_action(action act) {
 }
 //Execute the action
 public boolean execute_action(action act,int player) {
-	grids[act.getx()*width+act.gety()]=player;
-	return wincheck(act,player);
+	return false;
 }
+
 //Check winning conditions
 public boolean wincheck(action act,int player) {
-	//Check four directions, the new grid put can be at any point of the three combo. so we need to check 12 pairs of grids at max!
-	if(act.getx()>0&&act.getx()<height-1) if((grids[(act.getx()-1)*width+act.gety()]==player)&&(grids[(act.getx()+1)*width+act.gety()]==player)) {
-		grids[(act.getx()-1)*width+act.gety()]=3;
-		grids[(act.getx()+1)*width+act.gety()]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
+	return false;
+}
+//Check horizon lines
+public boolean horizonwincheck(int player,int x) {
+	for(int i=0;i<this.width-this.wincondition+1;i++) {
+		for(int j=i;j<i+this.wincondition;j++) {
+			if(grids[x*this.width+j]!=player) break;
+			if(j==i+this.wincondition-1) return true;//If any combo from i to j matches the combo length, then win
+		}
 	}
-	if(act.getx()<height-2) if((grids[(act.getx()+1)*width+act.gety()]==player)&&(grids[(act.getx()+2)*width+act.gety()]==player)) {
-		grids[(act.getx()+1)*width+act.gety()]=3;
-		grids[(act.getx()+2)*width+act.gety()]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
+	return false;
+}
+//Check vertical lines
+public boolean verticalwincheck(int player,int y) {
+	for(int i=0;i<this.height-this.wincondition+1;i++) {
+		for(int j=i;j<i+this.wincondition;j++) {
+			if(grids[j*this.width+y]!=player) break;
+			if(j==i+this.wincondition-1) return true;//If any combo from i to j matches the combo length, then win
+		}
 	}
-	if(act.getx()>1) if((grids[(act.getx()-1)*width+act.gety()]==player)&&(grids[(act.getx()-2)*width+act.gety()]==player)) {
-		grids[(act.getx()-1)*width+act.gety()]=3;
-		grids[(act.getx()-2)*width+act.gety()]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
+	return false;
+}
+//Check diagonal lines
+public boolean diagonalwincheck(int player,int x,int y) {
+	//Start point for the diagonal passing (x,y):(x-Math.min(x,y)),(y-Math.min(x,y)))
+	for(int i=0;i<Math.min(this.height-(x-Math.min(x,y)),this.width-(y-Math.min(x,y)))-this.wincondition+1;i++) {
+		for(int j=i;j<i+this.wincondition;j++) {
+			if(grids[((x-Math.min(x,y))+j)*this.width+(y-Math.min(x,y))+j]!=player) break;
+			if(j==i+this.wincondition-1) return true;//If any combo from i to j matches the combo length, then win
+		}
 	}
-	if(act.gety()>0&&act.gety()<width-1) if((grids[(act.getx())*width+act.gety()-1]==player)&&(grids[(act.getx())*width+act.gety()+1]==player)) {
-		grids[(act.getx())*width+act.gety()-1]=3;
-		grids[(act.getx())*width+act.gety()+1]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
+	return false;
+}
+//Check inverse diagonal lines
+public boolean inversediagonalwincheck(int player,int x,int y) {
+	//Start point for the inverse diagonal passing (x,y):(x-Math.min(x,this.width-y-1)),(y+Math.min(x,this.width-y-1)))
+	for(int i=0;i<Math.min(this.height-(x-Math.min(x,this.width-y-1)),(y+Math.min(x,this.width-y-1)+1))-this.wincondition+1;i++) {
+		for(int j=i;j<i+this.wincondition;j++) {
+			if(grids[((x-Math.min(x,this.width-y-1))+j)*this.width+(y+Math.min(x,this.width-y-1))-j]!=player) break;
+			if(j==i+this.wincondition-1) return true;//If any combo from i to j matches the combo length, then win
+		}
 	}
-	if(act.gety()<width-2) if((grids[(act.getx())*width+act.gety()+1]==player)&&(grids[(act.getx())*width+act.gety()+2]==player)) {
-		grids[(act.getx())*width+act.gety()+1]=3;
-		grids[(act.getx())*width+act.gety()+2]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
-	}
-	if(act.gety()>1) if((grids[(act.getx())*width+act.gety()-1]==player)&&(grids[(act.getx())*width+act.gety()-2]==player)) {
-		grids[(act.getx())*width+act.gety()-1]=3;
-		grids[(act.getx())*width+act.gety()-2]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
-	}
-	if(act.getx()>0&&act.gety()>0&&act.getx()<height-1&&act.gety()<width-1) if(grids[(act.getx()-1)*width+act.gety()-1]==player&&grids[(act.getx()+1)*width+act.gety()+1]==player) {
-		grids[(act.getx()-1)*width+act.gety()-1]=3;
-		grids[(act.getx()+1)*width+act.gety()+1]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
-	}
-	if(act.getx()>1&&act.gety()>1) if(grids[(act.getx()-1)*width+act.gety()-1]==player&&grids[(act.getx()-2)*width+act.gety()-2]==player) {
-		grids[(act.getx()-1)*width+act.gety()-1]=3;
-		grids[(act.getx()-2)*width+act.gety()-2]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
-	}
-	if(act.getx()<height-2&&act.gety()<width-2) if(grids[(act.getx()+1)*width+act.gety()+1]==player&&grids[(act.getx()+2)*width+act.gety()+2]==player) {
-		grids[(act.getx()+1)*width+act.gety()+1]=3;
-		grids[(act.getx()+2)*width+act.gety()+2]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
-	}
-	if(act.getx()>0&&act.gety()>0&&act.getx()<height-1&&act.gety()<width-1) if(grids[(act.getx()-1)*width+act.gety()+1]==player&&grids[(act.getx()+1)*width+act.gety()-1]==player) {
-		grids[(act.getx()-1)*width+act.gety()+1]=3;
-		grids[(act.getx()+1)*width+act.gety()-1]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
-	}
-	if(act.getx()>1&&act.gety()<width-2) if(grids[(act.getx()-1)*width+act.gety()+1]==player&&grids[(act.getx()-2)*width+act.gety()+2]==player) {
-		grids[(act.getx()-1)*width+act.gety()+1]=3;
-		grids[(act.getx()-2)*width+act.gety()+2]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
-	}
-	if(act.gety()>1&&act.getx()<height-2) if(grids[(act.getx()+2)*width+act.gety()-2]==player&&grids[(act.getx()+1)*width+act.gety()-1]==player) {
-		grids[(act.getx()+2)*width+act.gety()-2]=3;
-		grids[(act.getx()+1)*width+act.gety()-1]=3;
-		grids[(act.getx())*width+act.gety()]=3;
-		return true;
-	}
-	return false;//No win
+	return false;
 }
 }

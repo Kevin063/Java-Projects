@@ -1,6 +1,10 @@
 import java.util.Scanner;
 //Class for the TTT game
 public class TTTgame extends game{
+	public TTTgame() {
+		super();
+		this.gameboard=new TTTboard();
+	}
 	public String gamename() {
 			return "TTT";
 			}
@@ -21,18 +25,15 @@ public class TTTgame extends game{
 		if (player==this.getplayernum()) player=1;
 		else player++;
 		System.out.print("Action for the Player "+this.getplayerlist()[player-1]+":");
-		action act=new action(this.getgameboard());
+		action act=new action(this.getgameboard(),player);
 		if(act.getquit()) return "quit";
 		if(this.getgameboard().execute_action(act,player)) {
 			System.out.println(this.getgameboard().build_out());
-			System.out.println("Player"+player+", You win!");
+			System.out.println("Player"+this.getplayerlist()[player-1]+", You win!\n-------------------------------------");
 			return this.getplayerlist()[player-1];
 		}//If someone win afterward, end the game
 		else System.out.println(this.getgameboard().build_out());
 		if(this.getgameboard().checkstalemate()) return "stalemate";
 		}
 	}
-public TTTgame() {
-	super();
-}
 }

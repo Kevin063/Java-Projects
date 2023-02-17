@@ -1,19 +1,14 @@
 //Class for the game config, a game contains a board, and is playable.
 public class game {
-	private int playernum;
-	private int wincondition;
-	private board gameboard;
-	private String[] playerlist;
+	protected int playernum;
+	protected board gameboard;
+	protected String[] playerlist;
 	public game() {
-		this.gameboard=new board();
 		this.playernum=IO.readplayernum();
 		this.playerlist=IO.readplayername(playernum);
 	}
 	public int getplayernum() {
 		return this.playernum;
-	}
-	public int getwincondition() {
-		return this.wincondition;
 	}
 	public board getgameboard() {
 		return this.gameboard;

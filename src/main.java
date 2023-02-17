@@ -9,6 +9,11 @@ public class main {
 		lb=new leaderboard();
 		while(true) {
 		game gm=IO.readgame();
+		String[] playerlist=gm.getplayerlist();
+		//Record all appearing players
+		for(int i=0;i<playerlist.length;i++) {
+			lb.recordplayer(playerlist[i]);
+		}
 		String winner=gm.playgame();
 		if (winner.equals("quit")) {
 			System.out.println("The user has quited the game from the console command!");

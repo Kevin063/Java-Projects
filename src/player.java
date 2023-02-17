@@ -12,6 +12,6 @@ public class player {
 		if(gm.gamename().equals("TTT")) this.TTTwin++;
 	}
 	public void printplayer(){
-		System.out.println("won TTT "+TTTwin+" times, OC "+OCwin+"times, C4 "+Cfourwin+" times.");
+		System.out.println("won TTT "+TTTwin+" times, OC "+OCwin+" times, C4 "+Cfourwin+" times.");
 	}
 }
