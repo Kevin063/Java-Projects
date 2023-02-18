@@ -29,7 +29,6 @@ public class leaderboard {
 		Iterator it=leaderboard.entrySet().iterator();
 		while(it.hasNext()) {
 			Map.Entry pair=(Map.Entry)it.next();
-			System.out.print(pair.getKey()+" ");
 			((player) pair.getValue()).printplayer();
 		}
 		System.out.println("The game has been ends with stalemate for "+this.stalemate+" times.");

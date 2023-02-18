@@ -28,7 +28,7 @@ public class C4game extends game{
 		if(act.getquit()) return "quit";
 		if(this.getgameboard().execute_action(act,player)) {
 			System.out.println(this.getgameboard().build_out());
-			System.out.println("Player"+this.getplayerlist()[player-1]+", You win!\n-------------------------------------");
+			System.out.println("Player "+this.getplayerlist()[player-1]+", You win!\n-------------------------------------");
 			return this.getplayerlist()[player-1];
 		}//If someone win afterward, end the game
 		else System.out.println(this.getgameboard().build_out());

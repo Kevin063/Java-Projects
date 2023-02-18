@@ -24,12 +24,12 @@ public class OCgame extends game{
 		if (player==1) player=2;
 		else player=1;
 		if (player==1)System.out.print("Action for the Order Player "+this.getplayerlist()[0]+":");
-		else System.out.print("Action for the Chaos Player "+this.getplayerlist()[0]+":");
+		else System.out.print("Action for the Chaos Player "+this.getplayerlist()[1]+":");
 		OCaction act=new OCaction(this.getgameboard(),player);
 		if(act.getquit()) return "quit";
 		if(this.getgameboard().execute_action(act,act.player)) {
 			System.out.println(this.getgameboard().build_out());
-			System.out.println("Order Player"+this.getplayerlist()[0]+", You win!\n-------------------------------------");
+			System.out.println("Order Player "+this.getplayerlist()[0]+", You win!\n-------------------------------------");
 			return this.getplayerlist()[0];
 		}//If someone win afterward, end the game
 		else System.out.println(this.getgameboard().build_out());
