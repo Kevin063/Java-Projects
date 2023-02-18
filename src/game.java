@@ -4,8 +4,6 @@ public class game {
 	protected board gameboard;
 	protected String[] playerlist;
 	public game() {
-		this.playernum=IO.readplayernum();
-		this.playerlist=IO.readplayername(playernum);
 	}
 	public int getplayernum() {
 		return this.playernum;

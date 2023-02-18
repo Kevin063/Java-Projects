@@ -1,13 +1,12 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-//Class for storing all players match histtory
+//Class for storing all players match history
 public class leaderboard {
 	private HashMap<String,player> leaderboard;
 	private int stalemate;
 	public leaderboard() {
-		this.leaderboard=new HashMap();
+		this.leaderboard=new HashMap<String, player>();
 		this.stalemate=0;
 	}
 	public void recordwinner(String winner, game gm) {

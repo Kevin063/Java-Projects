@@ -1,10 +1,10 @@
-//Board rules for TTT
 import java.util.Arrays;
-public class TTTboard extends board{
-	public TTTboard() {
+//Board rules for C4
+public class C4board extends board{
+	public C4board() {
 		this.height=IO.readheight();
 		this.width=IO.readwidth();
-		this.wincondition=IO.readTTTwincondition(Math.max(this.height,this.width));
+		this.wincondition=IO.readC4wincondition(Math.max(this.height,this.width));
 		this.grids=new int[width*height];
 		Arrays.fill(this.grids, 0);
 	}

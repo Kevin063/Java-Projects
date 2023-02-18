@@ -1,12 +1,13 @@
-
-
+//Class for gameboard and wincheck functions
 import java.util.Arrays;
 
 public class board {
-private int width;
-private int height;
-private int wincondition;
-private int[] grids;
+protected int width;
+protected int height;
+protected int wincondition;
+protected int[] grids;
+public board() {
+}
 //Constructor
 public board(int a, int b,int wc) {
 	width=a;
@@ -14,9 +15,6 @@ public board(int a, int b,int wc) {
 	wincondition=wc;
 	grids=new int[width*height];
 	Arrays.fill(grids, 0);//For clearance, actually don't need since the default is 0
-}
-public board() {
-	this(IO.readheight(),IO.readwidth(),IO.readwincondition());
 }
 public int getheight() {
 	return this.height;
@@ -86,6 +84,7 @@ public boolean checkstalemate() {
 }
 //Validate whether the spot is taken yet
 public boolean vaild_action(action act) {
+	if (act.getx()*width+act.gety()<0) return false;
 	if (grids[act.getx()*width+act.gety()]!=0) return false;
 	else return true;
 }
@@ -96,7 +95,7 @@ public boolean execute_action(action act,int player) {
 
 //Check winning conditions
 public boolean wincheck(action act,int player) {
-	return false;
+	return horizonwincheck(player,act.getx())||verticalwincheck(player,act.gety())||diagonalwincheck(player,act.getx(),act.gety())||inversediagonalwincheck(player,act.getx(),act.gety());
 }
 //Check horizon lines
 public boolean horizonwincheck(int player,int x) {
