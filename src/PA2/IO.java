@@ -1,24 +1,25 @@
 package PA2;
-import java.io.IOException;
-//Abstract class for handing user interactions and generate outputs
+import java.io.IOException;//Abstract class for handing user interactions and generate outputs
 import java.util.Scanner;
-
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 public abstract class IO {
-//Read input to choose a mainpage action
-	public static void readmainpage(leaderboard lb) {
-	    int inChar;
-	    System.out.println("Enter a Character:");
-		Scanner s=new Scanner(System.in);
-		String input=s.nextLine();
-		System.out.flush();
-        switch(input) {
-        case("1"):{}
-        case("2"):{}
-        case("3"):return;
-        default:{
-			System.out.println("Please input a valid game number!");
-			readmainpage(lb);
-        }
-        }  
-	  }
-		}
+
+//Helper function
+	 public static void pressEnterToContinue()
+	 { 
+	        System.out.println("Press Enter key to continue...");
+	        try
+	        {
+	            System.in.read();
+	        }  
+	        catch(Exception e)
+	        {}  
+	 }
+//Helper function for clear console
+	 public static void clearconsole() {
+		 System.out.println(new String(new char[50]).replace("\0", "\r\n"));
+		 System.out.flush();  
+	 }
+}

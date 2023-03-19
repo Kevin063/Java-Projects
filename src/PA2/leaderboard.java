@@ -1,7 +1,10 @@
 package PA2;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Scanner;
 //Class for storing all players match history
 public class leaderboard {
 	private HashMap<String,player> leaderboard;
@@ -33,7 +36,7 @@ public class leaderboard {
                 + "║   Player     ║      Score        ║\n"
                 + "╠══════════════╬═══════════════════╣\n";
 		String framebot="╚══════════════╩═══════════════════╝";
-		System.out.println(frametop);
+		System.out.print(frametop);
 		Iterator it=leaderboard.entrySet().iterator();
 		while(it.hasNext()) {
 			Map.Entry pair=(Map.Entry)it.next();
@@ -41,4 +44,22 @@ public class leaderboard {
 		}
 		System.out.println(framebot);
 	}
+	//Try to read the leaderboard from the file system
+		public static leaderboard readleaderboard(){
+			//part of the file IO code comes from w3school tutorials
+			leaderboard lb=new leaderboard();
+		    try {
+		        File myObj = new File("leaderboard.txt");
+		        Scanner myReader = new Scanner(myObj);
+		        while (myReader.hasNextLine()) {
+		          String data = myReader.nextLine();
+		          String surname=data.substring(0,data.indexOf(";"));
+		          int bestscore=Integer.parseInt(data.substring(data.indexOf(";")+1));
+		          lb.recordwinner(surname, bestscore);
+		        }
+		        myReader.close();
+		      } catch (FileNotFoundException e) {
+		}
+		    return lb;
+			}
 }

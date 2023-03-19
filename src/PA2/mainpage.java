@@ -1,11 +1,9 @@
 package PA2;
 //The class that start a game or mutiple games from a console, and record match leaderboard.
 import java.util.Scanner;
-
-import PA1.leaderboard;
 public class mainpage {
 	public static void init() {
-		PA2.leaderboard lb = new PA2.leaderboard();
+		PA2.leaderboard lb = leaderboard.readleaderboard();
 		String logo = 
 				" █████╗ ██████╗ ███████╗██╗  ██╗    ██╗    ██╗ ██████╗ ██████╗ ██╗     ██████╗ \n" +
                 "██╔══██╗██╔══██╗██╔════╝╚██╗██╔╝    ██║    ██║██╔═══██╗██╔══██╗██║     ██╔══██╗\n" +
@@ -14,12 +12,12 @@ public class mainpage {
                 "██║  ██║██║     ███████╗██╔╝ ██╗    ╚███╔███╔╝╚██████╔╝██║  ██║███████╗██████╔╝\n" +
                 "╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝     ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ \n";
 		String welcomeMsg = 
-				"|                           WELCOME TO APEX WORLD                                 |\n" +logo+"\n"+
-                "|                                                                                |\n" +
+				"|                           WELCOME TO APEX WORLD                              |\n" +logo+"\n"+
+                "|                                                                              |\n" +
                 "|     ____________________________________________________________________     |\n" +
                 "|    |                                                                    |    |\n" +
                 "|    |                                                                    |    |\n" +
-                "|    |                            PRESS 1 TO                               |    |\n" +
+                "|    |                            PRESS 1 TO                              |    |\n" +
                 "|    |                         START NEW GAME                             |    |\n" +
                 "|    |                                                                    |    |\n" +
                 "|    |                                                                    |    |\n" +
@@ -28,7 +26,7 @@ public class mainpage {
                 "|     ____________________________________________________________________     |\n" +
                 "|    |                                                                    |    |\n" +
                 "|    |                                                                    |    |\n" +
-                "|    |                            PRESS 2 TO                               |    |\n" +
+                "|    |                            PRESS 2 TO                              |    |\n" +
                 "|    |                         VIEW LEADERBOARD                           |    |\n" +
                 "|    |                                                                    |    |\n" +
                 "|    ||                                                                  ||    |\n" +
@@ -36,15 +34,45 @@ public class mainpage {
                 "|     ____________________________________________________________________     |\n" +
                 "|    |                                                                    |    |\n" +
                 "|    |                                                                    |    |\n" +
-                "|    |                            PRESS 3 TO                               |    |\n" +
-                "|    |                            QUIT GAME                                |    |\n" +
+                "|    |                            PRESS 3 TO                              |    |\n" +
+                "|    |                            QUIT GAME                               |    |\n" +
                 "|    |                                                                    |    |\n" +
                 "|    ||                                                                  ||    |\n" +
                 "|    |                                                                    |    |\n" +
-                "|________________________________________________________________________________|\n";
+                "|______________________________________________________________________________|\n";
 
-
+    	IO.clearconsole();
 		System.out.println(welcomeMsg);
-		IO.readmainpage(lb);
+		readmainpage(lb);
 	}
+	//Read input to choose a mainpage action
+		public static void readmainpage(leaderboard lb) {
+		    int inChar;
+		    System.out.println("Input your action");
+			Scanner s=new Scanner(System.in);
+			String input=s.nextLine();
+			System.out.flush();
+	        switch(input) {
+	        case("1"):{
+	        	game g=new game();
+	        	g.play(lb);
+	        	break;
+	        }
+	        case("2"):{
+	        	IO.clearconsole();
+	        	lb.printleaderboard();
+	        	IO.pressEnterToContinue();
+	        	mainpage.init();
+	        	break;
+	        	}
+	        case("3"):{
+				System.out.println("The game has been saved, see you next time!");	
+	        	return;
+	        }
+	        default:{
+				System.out.println("Please input a valid game number!");
+				readmainpage(lb);
+	        }
+	        }  
+		  }
 }
