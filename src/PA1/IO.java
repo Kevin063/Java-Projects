@@ -1,7 +1,6 @@
 package PA1;
 //Abstract class for handing user interactions and generate outputs
 import java.util.Scanner;
-
 public abstract class IO {
 //Read input to choose a game
 	public static game readgame() {

@@ -1,9 +1,6 @@
 package PA2;
-import java.io.IOException;//Abstract class for handing user interactions and generate outputs
-import java.util.Scanner;
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Scanner; // Import the Scanner class to read text files
+//Abstract class for handing user interactions and generate outputs, supporting mutiple classes
+import java.io.IOException;
 public abstract class IO {
 
 //Helper function

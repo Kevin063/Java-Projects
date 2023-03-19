@@ -1,11 +1,14 @@
 package PA2;
+//Class for storing all players game history
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
-//Class for storing all players match history
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 public class leaderboard {
 	private HashMap<String,player> leaderboard;
 	private int stalemate;
@@ -43,6 +46,21 @@ public class leaderboard {
 			((player) pair.getValue()).printplayer();
 		}
 		System.out.println(framebot);
+	}
+	public void saveleaderboard() {
+		try {
+		BufferedWriter writer = new BufferedWriter(new FileWriter("leaderboard.txt"));
+		Iterator it=leaderboard.entrySet().iterator();
+		while(it.hasNext()) {
+			Map.Entry pair=(Map.Entry)it.next();
+			writer.write((pair.getKey())+";"+((player)(pair.getValue())).getbestscore());
+			writer.newLine();
+			} 
+		writer.close();
+		}catch (IOException e) {
+				System.out.println("IO error while saving the leaderboard!");
+			}
+        System.out.println("Leaderboard is successfully saved.");
 	}
 	//Try to read the leaderboard from the file system
 		public static leaderboard readleaderboard(){

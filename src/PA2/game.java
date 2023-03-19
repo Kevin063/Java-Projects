@@ -24,15 +24,19 @@ public class game {
 				+ "• Q/q: quit game\r\n"
 				+ "• I/i: show information\r\n"
 				+ "• M/m: enter market");
+		IO.pressEnterToContinue();
 		boolean exit=false;
 		while(!exit) {
 			System.out.println("Enter your hero team's action:");
 			Scanner s=new Scanner(System.in);
 			String input=s.nextLine();
+			IO.clearconsole();
 	        switch(input) {
+	        case("q"):
 	        case("Q"):{
 	        	exit=true;
 	        	lb.recordwinner(player, score);
+	        	lb.saveleaderboard();
 	        	System.out.print("\033[0;32m");
 	        	System.out.println("Your score has been saved, see you next time!");
 	        	System.out.print("\033[0;0m");

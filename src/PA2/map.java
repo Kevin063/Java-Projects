@@ -1,8 +1,6 @@
 package PA2;
-
-import java.util.Scanner;
-
 //Class for the map generation and display
+import java.util.Scanner;
 public class map {
 	protected int width;
 	protected int height;
@@ -17,7 +15,7 @@ public class map {
 		this(10,10);
 	}
     public void printMap() {
-    	// I take part of the code from internet to complete this part, since I'm not familiar with the coloring, and manually adjusting the formatting takes too much time.
+    	// I got help from internet code source to complete the coloring part.
         int m = grids.length;
         int n = grids[0].length;
         // Print top border
@@ -26,7 +24,6 @@ public class map {
             System.out.print("━━━┳");
         }
         System.out.println("━━━┓");
-
         // Print map contents
         for (int i = 0; i < m; i++) {
             System.out.print("┃ ");
@@ -45,7 +42,6 @@ public class map {
                 System.out.print("\033[0m┃ ");
             }
             System.out.println();
-
             // Print separator between rows
             if (i != m - 1) {
                 System.out.print("┣");
