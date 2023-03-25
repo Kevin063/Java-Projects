@@ -23,7 +23,7 @@ public class bloodhound extends hero {
 			checkupgrade();
 		}
 	}
-	//Get stats enhanced
+	//Get stats and his weapon enhanced
 	public void upgrade() {
 		setMaxHP((int)(getMaxHP()*(1+0.1*Math.random())));
 		setMaxMP((int)(getMaxMP()*(1+0.1*Math.random())));

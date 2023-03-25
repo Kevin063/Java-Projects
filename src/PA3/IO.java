@@ -1,6 +1,8 @@
 package PA3;
 //Abstract class for handing user interactions and generate outputs, supporting mutiple classes
 import java.io.*;
+import java.util.Scanner;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -14,7 +16,8 @@ public interface IO {
 	        System.out.println("Press Enter key to continue...");
 	        try
 	        {
-	            System.in.read();
+	    		Scanner s=new Scanner(System.in);
+	    		String input=s.nextLine();
 	        }  
 	        catch(Exception e)
 	        {}  

@@ -5,18 +5,29 @@ public class map {
 	protected int width;
 	protected int height;
 	protected char[][] grids;
+	protected market[][] globalmarket;
 	protected double monsterindex;
 	protected int playerx;
 	protected int playery;
 	protected String maptype;
 	protected int battlesize;
+	protected double escapechance;
 	public map(int width, int height) {
 		this.width=width;
 		this.height=height;
 		grids=new char[height][width];
+		globalmarket=new market[height][width];
 	}
 	public map() {
 		this(10,10);
+	}
+	//Generate inventories in all markets in the worlds
+	public void generateMarket() {
+		for(int i=0;i<height;i++) {
+			for(int j=0;j<width;j++) {
+				if(grids[i][j]=='M') globalmarket[i][j]=new market();
+			}
+		}
 	}
     public void printMap() {
     	// I got help from internet code source to complete the coloring part.
@@ -61,6 +72,7 @@ public class map {
         for (int j = 0; j < n; j++) {
             System.out.print("━━━┻");
         }
+        System.out.print("\n");
     }
 	public static map readmap() {
 		IO.clearconsole();
@@ -111,6 +123,7 @@ public class map {
         IO.pressEnterToContinue();
         return map;
 	}
+	//Try to move in a direction
 	public boolean move(String direction) {
 	switch(direction) {
 	case("W"):{
@@ -121,7 +134,12 @@ public class map {
 			return false;
 		}
 		else {
+			if(globalmarket[playerx][playery]==null) grids[playerx][playery]=' ';//If leave a empty grid
+			else grids[playerx][playery]='M';//If leave a market
+			grids[playerx-1][playery]='P';
 			playerx--;
+			this.printMap();
+			System.out.println("Your team moves.");
 			return true;
 		}
 	}
@@ -133,7 +151,12 @@ public class map {
 			return false;
 		}
 		else {
+			if(globalmarket[playerx][playery]==null) grids[playerx][playery]=' ';//If leave a empty grid
+			else grids[playerx][playery]='M';//If leave a market
+			grids[playerx+1][playery]='P';
 			playerx++;
+			this.printMap();
+			System.out.println("Your team moves.");
 			return true;
 		}
 	}
@@ -145,7 +168,12 @@ public class map {
 			return false;
 		}
 		else {
+			if(globalmarket[playerx][playery]==null) grids[playerx][playery]=' ';//If leave a empty grid
+			else grids[playerx][playery]='M';//If leave a market
+			grids[playerx][playery-1]='P';
 			playery--;
+			this.printMap();
+			System.out.println("Your team moves.");
 			return true;
 		}
 	}
@@ -157,7 +185,12 @@ public class map {
 			return false;
 		}
 		else {
+			if(globalmarket[playerx][playery]==null) grids[playerx][playery]=' ';//If leave a empty grid
+			else grids[playerx][playery]='M';//If leave a market
+			grids[playerx][playery+1]='P';
 			playery++;
+			this.printMap();
+			System.out.println("Your team moves.");
 			return true;
 		}
 	}
@@ -176,5 +209,9 @@ public class map {
 	//Get battle size
 	public int getBattlesize() {
 		return battlesize;
+	}
+	//Get chance to escape a battle
+	public double getEscapeChance() {
+		return this.escapechance;
 	}
 }

@@ -13,6 +13,7 @@ public class game {
 		gold=0;
 		this.player=this.readplayername();
 		this.map=map.readmap();
+		this.heroes=new hero[5];
 		this.heroes[0]=hero.readHero();
 	}
 	//The recursive process for a game
@@ -21,14 +22,13 @@ public class game {
 		System.out.println("The game starts!");
 	    System.out.print("\033[0;0m");
 		System.out.println(
-				"W/w: move up\r\n"
+				"• W/w: move up\r\n"
 				+ "• A/a: move left\r\n"
 				+ "• S/s: move down\r\n"
 				+ "• D/d: move right\r\n"
 				+ "• Q/q: quit game\r\n"
 				+ "• I/i: show information\r\n"
 				+ "• M/m: enter market");
-		IO.pressEnterToContinue();
 		boolean exit=false;
 		while(!exit) {
 			System.out.println("Enter your hero team's action:");
@@ -61,14 +61,13 @@ public class game {
 	        			System.out.print("\033[0;0m");
 	        		}
 	        		else if(battlecheck()) {
-	        			battle b=new battle(heroes,score);
-	        			if(!b.begin()) {
+	        			battle b=new battle(heroes,map, score);
+	        			if(!b.startRound()) {
 	        	        	exit=true;
 	        	        	lb.recordwinner(player, score);
 	        	        	lb.saveleaderboard();
 	        	        	IO.clearconsole();
 	        	        	System.out.print("\033[0;32m");
-	        	        	System.out.println("Everyone is dead and gone. The story is over.");
 	        	        	IO.pressEnterToContinue();
 	        	        	System.out.println("Your score has been saved, see you next time!");
 	        	        	System.out.print("\033[0;0m");
