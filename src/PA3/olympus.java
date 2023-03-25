@@ -2,6 +2,7 @@ package PA3;
 //Subclass for a plainmap, less monster, smaller map but better resources.
 public class olympus extends map{
 	public olympus(int width, int height) {
+		this.maptype="olympus";
 		this.width=width;
 		this.height=height;
 		grids=new char[height][width];

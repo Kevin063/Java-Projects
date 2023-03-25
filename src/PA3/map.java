@@ -8,6 +8,7 @@ public class map {
 	protected double monsterindex;
 	protected int playerx;
 	protected int playery;
+	protected String maptype;
 	public map(int width, int height) {
 		this.width=width;
 		this.height=height;
@@ -167,5 +168,8 @@ public class map {
 	}
 	public char getloc() {
 		return grids[playerx][playery];
+	}
+	public String getMaptype() {
+		return maptype;
 	}
 }

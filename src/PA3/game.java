@@ -7,12 +7,14 @@ public class game {
 	private map map;
 	private String player;
 	private hero[] heroes;
+	//Init a game and set name and map
 	public game() {
 		score=0;
 		gold=0;
 		this.player=this.readplayername();
 		this.map=map.readmap();
 	}
+	//The recursive process for a game
 	public void play(leaderboard lb) {
 	    System.out.print("\033[0;32m");
 		System.out.println("The game starts!");
@@ -52,7 +54,12 @@ public class game {
 	        case("d"):
 	        case("D"):{
 	        	if(map.move(input.toUpperCase())) {
-	        		if(battlecheck()) {
+	        		if(marketcheck()) {
+	        			System.out.print("\033[0;32m");
+	        			System.out.println(market.encounterMessage(map));
+	        			System.out.print("\033[0;0m");
+	        		}
+	        		else if(battlecheck()) {
 	        			battle b=new battle(heroes,score);
 	        			if(!b.begin()) {
 	        	        	exit=true;
@@ -64,12 +71,11 @@ public class game {
 	        	        	IO.pressEnterToContinue();
 	        	        	System.out.println("Your score has been saved, see you next time!");
 	        	        	System.out.print("\033[0;0m");
-	        	        	break;
 	        			}
 	        		}
 	        	}
-	        	}
 	        	break;
+	        	}
 	        case("3"):{
 	        	break;
 	        }
@@ -94,6 +100,7 @@ public class game {
 	public int getgold() {
 		return gold;
 	}
+	//read player name from IO
 	public static String readplayername() {
 		Scanner s=new Scanner(System.in);
 		System.out.print("Please enter the player's surname.");
@@ -108,6 +115,13 @@ public class game {
 			return true;
 		}
 	}
+	return false;
+	}
+//Check whether enter a market
+	public boolean marketcheck() {
+	if(map.getloc()=='M') {
+			return true;
+		}
 	return false;
 	}
 }

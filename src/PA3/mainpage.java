@@ -43,6 +43,7 @@ public class mainpage {
 
     	IO.clearconsole();
 		System.out.println(welcomeMsg);
+//		IO.playSound("sounds/gamestart.wav");
 		readmainpage(lb);
 	}
 	//Read input to choose a mainpage action

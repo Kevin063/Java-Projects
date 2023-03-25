@@ -1,7 +1,8 @@
 package PA3;
 //Subclass for a circle map, the map is surrounded by Inaccessible spaces
-public class stormPoint extends map{
-	public stormPoint(int width, int height) {
+public class stormpoint extends map{
+	public stormpoint(int width, int height) {
+		this.maptype="stormpoint";
 		this.width=width;
 		this.height=height;
 		grids=new char[height][width];

@@ -1,7 +1,8 @@
 package PA3;
 //Subclass for a mountainmap, more blockers, less market
-public class kingsCanyon extends map{
-	public kingsCanyon(int width, int height) {
+public class kingscanyon extends map{
+	public kingscanyon(int width, int height) {
+		this.maptype="kingsCanyon";
 		this.width=width;
 		this.height=height;
 		grids=new char[height][width];
@@ -17,7 +18,7 @@ public class kingsCanyon extends map{
 		this.playery=(width-1)/2;
 		grids[playerx][playery]='P';
 	}
-	public kingsCanyon() {
+	public kingscanyon() {
 		this(15,15);
 		this.monsterindex=0.2;
 	}

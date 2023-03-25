@@ -1,9 +1,14 @@
 package PA3;
 //Abstract class for handing user interactions and generate outputs, supporting mutiple classes
-import java.io.IOException;
+import java.io.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 public interface IO {
 
-//Helper function
+//Helper function for pause
 	 public static void pressEnterToContinue()
 	 { 
 	        System.out.println("Press Enter key to continue...");
