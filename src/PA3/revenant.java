@@ -3,13 +3,13 @@ package PA3;
 public class revenant extends hero {
 	private boolean deathrattle;
 	public revenant() {
-		setName("pathfinder");
-		setMaxHP(300);
-		setMaxMP(200);
+		setName("revenant");
+		setMaxHP(500);
+		setMaxMP(300);
 		setLevel(1);
-		setStrength(20);
-		setDexterity(50);
-		setAgility(70);
+		setStrength(60);
+		setDexterity(40);
+		setAgility(30);
 		setGold(0);
 		setExp(0);
 		setInv(new inventory());
@@ -29,7 +29,7 @@ public class revenant extends hero {
 	}
 	//Reset deathrattle once refresh HP
 	public void refresh() {
-		this.refresh();
+		super.refresh();
 		deathrattle=true;
 	}
 }

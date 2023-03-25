@@ -13,6 +13,7 @@ public class game {
 		gold=0;
 		this.player=this.readplayername();
 		this.map=map.readmap();
+		this.heroes[0]=hero.readHero();
 	}
 	//The recursive process for a game
 	public void play(leaderboard lb) {

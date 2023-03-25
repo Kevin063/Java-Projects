@@ -6,6 +6,8 @@ public abstract class hero extends character {
 	protected int gold;
 	protected inventory inv;
 	protected int exp;
+	protected item weapon;
+	protected item armour;
 	//Restore all HP and MP for a hero
 	public void refresh() {
 		this.setHP(this.getMaxHP());
@@ -16,71 +18,91 @@ public abstract class hero extends character {
 		exp=exp+amount;
 		checkupgrade();
 	}
-	//Check whether exp is enough used for upgrading, if so, do this and get stats enhanced.
+	//Check whether exp is enough used for upgrading, if so, do this.
 	public void checkupgrade() {
 		if(exp>level*100) {
 			exp-=level*100;
+			upgrade();
 			level++;
-			System.out.println("Hero "+this.getName()+" has upgraded to level "+this.getLevel()+"!");
-			setMaxHP((int)(getMaxHP()*(1+0.1*Math.random())));
-			setMaxMP((int)(getMaxMP()*(1+0.1*Math.random())));
-			setStrength((int)(getStrength()*(1+0.1*Math.random())));
-			setDexterity((int)(getDexterity()*(1+0.1*Math.random())));
-			setAgility((int)(getAgility()*(1+0.1*Math.random())));
-			refresh();
 			checkupgrade();
 		}
 	}
+	//Get stats enhanced
+	public void upgrade() {
+		setMaxHP((int)(getMaxHP()*(1+0.1*Math.random())));
+		setMaxMP((int)(getMaxMP()*(1+0.1*Math.random())));
+		setStrength((int)(getStrength()*(1+0.1*Math.random())));
+		setDexterity((int)(getDexterity()*(1+0.1*Math.random())));
+		setAgility((int)(getAgility()*(1+0.1*Math.random())));
+		refresh();
+		System.out.println("Hero "+this.getName()+" has upgraded to level "+this.getLevel()+"!");
+	}
 	//Read the starting hero from the player
-	public hero readHero() {
+	public static hero readHero() {
 		IO.clearconsole();
 	    int inChar;
 	    System.out.println("Enter a starting hero to begin your adventure, you can recurit more heroes to your team in the future.");
-	    System.out.print("\033[0;32m");
+	    System.out.print("\033[0;34m");
 	    System.out.println("1. Pathfinder");
 	    System.out.print("\033[0;0m");
 	    System.out.println("[Pathfinder is the picture of optimism, despite his circumstances. A MRVN (Mobile Robotic Versatile eNtity) with a talent for location scouting and surveying, he booted up decades ago in an abandoned warehouse with no idea who created him or why. With only his MRVN designation to hint at his identity]");
-	    System.out.println("Heirloom: Pathfinder has a retractable and reusable grappling hook, which allow his whole team quickly transfer from the wild back to a safe settlement.");
-	    System.out.print("\033[0;33m");
-	    System.out.println("2. Kings Canyon");
+	    System.out.println("Heirloom: Pathfinder has a retractable and reusable grappling hook in his inventory, which allow his whole team quickly transfer from the wild back to a safe settlement.");
+	    System.out.print("\033[0;34m");
+	    System.out.println("2. Revenant");
 	    System.out.print("\033[0;0m");
-	    System.out.println("[Covered by countless rock roofs, adventurers come to Kings Canyon for treasures and golds.]");
-	    System.out.print("\033[0;31m");
-	    System.out.println("3. Strom Point");
+	    System.out.println("[Revenant used to be human. He used to be the greatest hitman the Mercenary Syndicate ever had. He used to look in the mirror and see his human face looking back. His masters resurrected him as a simulacrum, snatching him from death’s embrace again and again and programming him to forget.]");
+	    System.out.println("Dattlerate: Revenant can use its undead soul to escape from the spirit world, and it is immune to the first fatal damage per battle.");
+	    System.out.print("\033[0;34m");
+	    System.out.println("3. Blood Hound");
 	    System.out.print("\033[0;0m");
-	    System.out.println("The strom point is designed to be unfair. Huge threats will crash upon you without mercy. Only for players who want to struggle to survive.");
+	    System.out.println("[Bloodhound is known across the Outlands as one of the greatest game hunters the Frontier has ever seen. Bloodhound believes that destiny is a path that has already been laid out, eventually carrying all to their death.]");
+	    System.out.println("Raven's Bite: Bloodhound hunts down enemies with his hextech scythe. He is born with a weapon that can always hit the enemy's weak point, and this weapon will also grow as the master's level increases. But at the same time, the Bloodhound cannot be equipped with other weapons, only to let Raven's Bite absorb their power.");
 		Scanner s=new Scanner(System.in);
 		String input=s.nextLine();
 		System.out.flush();
-		map map;
+		hero h;
         switch(input) {
         case("1"):{
-        	map=new olympus(); 
+        	h=new pathfinder();
         	break;
         }
         case("2"):{
-        	map=new kingscanyon();
+        	h=new revenant();
         	break;
         	}
         case("3"):{
-        	map=new stormpoint();
+        	h=new bloodhound();
         	break;
         }
         default:{
 			System.out.println("Please input a valid map number!");
-			return readmap();
+			return readHero();
         }
         }
-        System.out.println("World generating...");
-        try {
-			Thread.sleep(1000);//Simulate the world generation....
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-        map.printMap();
-        System.out.println("\nThe world generation complete!");
+        System.out.println("This is your Champion: ");
+        h.printStats();
         IO.pressEnterToContinue();
-        return map;
+        return h;
+	}
+	//Class for displaying a hero's stats
+	public void printStats() {
+	    System.out.println("+----------------------+");
+	    System.out.println("|   Hero Information   |");
+	    System.out.println("+----------------------+");
+	    System.out.printf("| %-10s: %10s |\n", "Name", name);
+	    System.out.printf("| %-10s: %10d |\n", "Level", level);
+	    System.out.printf("| %-10s: %10d |\n", "Max HP", maxHP);
+	    System.out.printf("| %-10s: %10d |\n", "Max MP", maxMP);
+	    System.out.printf("| %-10s: %10d |\n", "HP", HP);
+	    System.out.printf("| %-10s: %10d |\n", "MP", MP);
+	    System.out.printf("| %-10s: %10d |\n", "Strength", strength);
+	    System.out.printf("| %-10s: %10d |\n", "Dexterity", dexterity);
+	    System.out.printf("| %-10s: %10d |\n", "Agility", agility);
+	    System.out.printf("| %-10s: %10d |\n", "Gold", gold);
+	    System.out.printf("| %-10s: %10d |\n", "Experience", exp);
+	    System.out.printf("| %-10s: %10s |\n", "Weapon", weapon == null ? "Not Equiped" : weapon.getName());
+	    System.out.printf("| %-10s: %10s |\n", "Armour", armour == null ? "Not Equiped" : armour.getName());
+	    System.out.println("+----------------------+");
 	}
 	// Getter and setter for gold
 	public int getGold() {

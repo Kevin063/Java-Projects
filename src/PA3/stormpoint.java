@@ -5,6 +5,7 @@ public class stormpoint extends map{
 		this.maptype="stormpoint";
 		this.width=width;
 		this.height=height;
+		this.battlesize=3;
 		grids=new char[height][width];
 		for(int i=0;i<height;i++) {
 			for(int j=0;j<width;j++) {
@@ -19,7 +20,7 @@ public class stormpoint extends map{
 		this.playery=(width-1)/2;
 		grids[playerx][playery]='P';
 	}
-	public stormPoint() {
+	public stormpoint() {
 		this(15,15);
 		this.monsterindex=0.5;
 	}

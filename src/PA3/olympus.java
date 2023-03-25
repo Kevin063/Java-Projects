@@ -5,6 +5,7 @@ public class olympus extends map{
 		this.maptype="olympus";
 		this.width=width;
 		this.height=height;
+		this.battlesize=3;
 		grids=new char[height][width];
 		for(int i=0;i<height;i++) {
 			for(int j=0;j<width;j++) {

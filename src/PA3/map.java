@@ -9,6 +9,7 @@ public class map {
 	protected int playerx;
 	protected int playery;
 	protected String maptype;
+	protected int battlesize;
 	public map(int width, int height) {
 		this.width=width;
 		this.height=height;
@@ -87,11 +88,11 @@ public class map {
         	break;
         }
         case("2"):{
-        	map=new kingsCanyon();
+        	map=new kingscanyon();
         	break;
         	}
         case("3"):{
-        	map=new stormPoint();
+        	map=new stormpoint();
         	break;
         }
         default:{
@@ -171,5 +172,9 @@ public class map {
 	}
 	public String getMaptype() {
 		return maptype;
+	}
+	//Get battle size
+	public int getBattlesize() {
+		return battlesize;
 	}
 }
