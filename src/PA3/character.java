@@ -18,6 +18,11 @@ public abstract class character {
 	public boolean checkAlive() {
 		return HP>0;
 	}
+	//Restore all HP and MP for a character
+	public void refresh() {
+		this.setHP(this.getMaxHP());
+		this.setMP(this.getMaxMP());
+	}
 	// Getter and setter for name
 	public String getName() {
 	    return name;
@@ -81,4 +86,10 @@ public abstract class character {
 	public void setAgility(int agility) {
 	    this.agility = agility;
 	}
+	// Get the name for the weapon
+	public abstract String getWeapon();
+	//Get the weapon damage
+	public abstract int getWeaponDamage();
+	//Get the armor defend
+	public abstract int getArmourDefend();
 }

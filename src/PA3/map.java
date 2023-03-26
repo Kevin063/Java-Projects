@@ -89,7 +89,7 @@ public class map {
 	    System.out.print("\033[0;31m");
 	    System.out.println("3. Strom Point");
 	    System.out.print("\033[0;0m");
-	    System.out.println("The strom point is designed to be unfair. Huge threats will crash upon you without mercy. Only for players who want to struggle to survive.");
+	    System.out.println("[The strom point is designed to be unfair. Huge threats will crash upon you without mercy. Only for players who want to struggle to survive.]");
 		Scanner s=new Scanner(System.in);
 		String input=s.nextLine();
 		System.out.flush();

@@ -18,15 +18,26 @@ public class game {
 	}
 	//The recursive process for a game
 	public void play(leaderboard lb) {
-	    System.out.print("\033[0;32m");
-		System.out.println("The game starts!");
+    	System.out.print("\033[0;31m");
+		System.out.print("You wake up in a dark dungeon, guarded by a group of dwarven goblins.\nFinally you waited until one night, pried open the iron door of the cell, and when you were about to walk out of the dungeon, a goblin jailer noticed you!");
 	    System.out.print("\033[0;0m");
+		IO.clearconsole();
+		IO.pressEnterToContinue();
+		battle tutorial=new tutorial(heroes);
+		tutorial.startRound();
+	    System.out.print("\033[0;0m");
+	    System.out.print("\033[0;32m");
+		System.out.println("Now that you have escaped from this prison guarded by goblins, a Bounty Hunter named Twisted Fate is willing to take risks with you, and you embark on a journey of adventure in "+this.map.getMaptype());
+		System.out.println("Twisted Fate has joined the team!");
+	    System.out.print("\033[0;0m");
+	    IO.pressEnterToContinue();
+	    map.printMap();
 		System.out.println(
 				"• W/w: move up\r\n"
 				+ "• A/a: move left\r\n"
 				+ "• S/s: move down\r\n"
 				+ "• D/d: move right\r\n"
-				+ "• Q/q: quit game\r\n"
+				+ "• Q/q: Back to the mainpage\r\n"
 				+ "• I/i: show information\r\n"
 				+ "• M/m: enter market");
 		boolean exit=false;
@@ -44,6 +55,7 @@ public class game {
 	        	System.out.print("\033[0;32m");
 	        	System.out.println("Your score has been saved, see you next time!");
 	        	System.out.print("\033[0;0m");
+	        	IO.pressEnterToContinue();
 	        	break;
 	        }
 	        case("w"):

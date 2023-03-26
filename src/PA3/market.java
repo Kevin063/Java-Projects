@@ -21,7 +21,7 @@ public class market {
 		System.out.print(frametop);
 		for(int i=0;i<marketSize;i++) {
 			if(inventory[i]!=null) {
-				System.out.print("║   "+inventory[i].get+String.format("%"+(11-this.surname.length())+"s", "")+"║       "+this.bestscore+String.format("%"+(11-Math.log10(bestscore+1))+"s", "")+"║\n");
+				System.out.print("║   "+inventory[i].getName()+String.format("%"+(11-this.surname.length())+"s", "")+"║       "+this.bestscore+String.format("%"+(11-Math.log10(bestscore+1))+"s", "")+"║\n");
 			}
 		}
 		System.out.println(framebot);

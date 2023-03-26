@@ -6,7 +6,7 @@ public class pathfinder extends hero {
 		setMaxHP(300);
 		setMaxMP(200);
 		setLevel(1);
-		setStrength(20);
+		setStrength(25);
 		setDexterity(50);
 		setAgility(70);
 		setGold(0);

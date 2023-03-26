@@ -6,13 +6,8 @@ public abstract class hero extends character {
 	protected int gold;
 	protected inventory inv;
 	protected int exp;
-	protected item weapon;
-	protected item armour;
-	//Restore all HP and MP for a hero
-	public void refresh() {
-		this.setHP(this.getMaxHP());
-		this.setMP(this.getMaxMP());
-	}
+	protected weapon weapon;
+	protected armour armour;
 	//Earn Exp from battle
 	public void earnExp(int amount) {
 		exp=exp+amount;
@@ -22,8 +17,8 @@ public abstract class hero extends character {
 	public void checkupgrade() {
 		if(exp>level*100) {
 			exp-=level*100;
-			upgrade();
 			level++;
+			upgrade();
 			checkupgrade();
 		}
 	}
@@ -115,6 +110,10 @@ public abstract class hero extends character {
 	public void setGold(int gold) {
 	    this.gold = gold;
 	}
+	//Earn gold
+	public void earnGold(int gold) {
+		this.gold+=gold;
+	}
 	// Getter and setter for inventory
 	public inventory getInv() {
 	    return inv;
@@ -129,4 +128,19 @@ public abstract class hero extends character {
 	public void setExp(int exp) {
 	    this.exp = exp;
 	}
+	// Get the name for the weapon
+	public String getWeapon() {
+		if(this.armour==null) return "fist";
+		else return this.weapon.getName();
+	}
+	//Get the weapon damage
+	public int getWeaponDamage() {
+		if(this.weapon==null) return 0;
+		else return this.weapon.getDamage();
+	}
+	//Get the armor defend
+	public int getArmourDefend() {
+		if(this.armour==null) return 0;
+		else return this.armour.getDefend();
+	};
 }
