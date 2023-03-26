@@ -24,8 +24,14 @@ public class game {
 		IO.clearconsole();
 		IO.pressEnterToContinue();
 		battle tutorial=new tutorial(heroes);
-		tutorial.startRound();
+		if(!tutorial.startRound()) {
+        	lb.saveleaderboard();
+        	IO.clearconsole();
+        	System.out.print("\033[0;32m");
+        	IO.pressEnterToContinue();
+		}
 	    System.out.print("\033[0;0m");
+	    
 	    System.out.print("\033[0;32m");
 		System.out.println("Now that you have escaped from this prison guarded by goblins, a Bounty Hunter named Twisted Fate is willing to take risks with you, and you embark on a journey of adventure in "+this.map.getMaptype());
 		System.out.println("Twisted Fate has joined the team!");
@@ -88,9 +94,6 @@ public class game {
 	        	}
 	        	break;
 	        	}
-	        case("3"):{
-	        	break;
-	        }
 	        default:{
 				System.out.println("Please input a valid action, below is the supported input!");
 				System.out.println(

@@ -33,7 +33,7 @@ public class battle {
 	    System.out.print("\033[0;32m");
 		System.out.println("Your turn!");
 	    System.out.print("\033[0;0m");	
-		for (int i=0;i<heroslot.length;i++) {
+		for (int i=0;i<heroslot.length;i++) {//Hero's round
 			if(heroslot[i]!=null) {
 				System.out.println("Turn for Hero "+heroslot[i].getName()+".");
 				heroAction(heroslot[i]);
@@ -44,9 +44,28 @@ public class battle {
 				if (winCheck(false)) return true;
 		}
 		}
-		
-		if (winCheck(true)) return false;
-		else return startRound();
+	    System.out.print("\033[0;31m");
+		System.out.println("Monster's turn!");
+	    System.out.print("\033[0;0m");
+		for (int i=0;i<monsterslot.length;i++) {//Monster's round
+			if(monsterslot[i]!=null) {
+				System.out.println("Turn for Monster "+monsterslot[i].getName()+".");
+				int victim=findTarget();
+				attack a=new attack(monsterslot[i],heroslot[victim]);
+	        	a.apply();
+	        	if(!heroslot[victim].checkAlive()) {
+	        	    System.out.print("\033[0;31m");
+	        	    IO.clearconsole();
+	        		System.out.println(heroslot[victim].getName()+" is killed!");
+	        	    System.out.print("\033[0;0m");	
+	        	    heroslot[victim]=null;
+	        	    enterBattle(true,victim);
+	        	}
+				if (winCheck(true)) return false;
+		}
+		}
+		IO.pressEnterToContinue();
+		return startRound();
 	}
 	//Read action for a hero
 	public void heroAction(hero h) {
@@ -78,9 +97,24 @@ public class battle {
         	break;
         }
         case("S"):{
+        	spell sp=h.getInv().getSpellBook().openBook(h);
+        			if(sp==null) heroAction(h);//If quit spellbook
+        			else {
+        				if(sp.getSpellType()) {
+        					sp.cast(heroslot[readTarget(true)]);
+        				}
+        				else {
+            				if(sp.getSpellType()) {
+            					sp.cast(heroslot[readTarget(true)]);
+        				}
+        			}
+        			}
         	break;
         	}
         case("R"):{
+    	    System.out.print("\033[0;32m");
+    		System.out.println(h.getName()+" has taken a rest.");
+    	    System.out.print("\033[0;0m");	
         	break;
         }
         case("E"):{
@@ -124,6 +158,12 @@ public class battle {
 			IO.pressEnterToContinue();
 			return readTarget(type);
         }  
+		if(input<0){
+			System.out.println("Please input a vaild number!");
+			IO.clearconsole();
+			IO.pressEnterToContinue();
+			return readTarget(type);
+        } 
 		if(type) {
 			if(heroslot[input]!=null) return input;
 			else {
@@ -138,6 +178,15 @@ public class battle {
 				return readTarget(type);
 			}
 		}
+	}
+	//Randomly choose a hero as the monster's target
+	public int findTarget() {
+		int number=0;
+		for (int i=0;i<heroslot.length;i++) {
+			if(heroslot[i]!=null) {
+				number++;			}
+		}
+		return ((int)(Math.random()*100))%number;
 	}
 	//Show stats of the both side
 	public void showStats() {

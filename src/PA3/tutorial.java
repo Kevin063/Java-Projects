@@ -1,13 +1,13 @@
 package PA3;
-
+//The Tutorial battle for player to get familiar with the battle
 import java.util.Arrays;
 import java.util.LinkedList;
-//The Tutorial battle for player to get familiar with the battle
 public class tutorial extends battle {
 	public tutorial(hero[] h) {
 		super(h,new LinkedList<monster>(),3,0);
-		monster jailer1=new globlin();
-		monster jailer2=new globlin();
+		this.map=new olympus();
+		monster jailer1=new jailer();
+		monster jailer2=new jailer();
 		LinkedList<monster> m=new LinkedList<monster>();
 		m.add(jailer1);
 		m.add(jailer2);

@@ -12,6 +12,8 @@ public class pathfinder extends hero {
 		setGold(0);
 		setExp(0);
 		setInv(new inventory());
+		this.inv.putitem(new quickheal());
+		this.inv.putitem(new quickheal());
 		refresh();
 	}
 }

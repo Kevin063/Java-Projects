@@ -14,6 +14,11 @@ public abstract class monster extends character {
 	public int getArmourDefend() {
 		return 0;
 	}
+	public void setValue(int v) {
+		value=v;
+	}
 	//Get the gold value of the monster
-	public abstract int getvalue();
+	public int getvalue() {
+		return value;
+	};
 }

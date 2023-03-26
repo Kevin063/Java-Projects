@@ -12,7 +12,7 @@ public class attack {
 			getBodyPart();
 			boolean miss=Math.random()>(0.7+0.01*attacker.getDexterity()-0.01*defender.getAgility());
 			if(Math.random()<0.002*attacker.getDexterity()) miss=false;//Attacker always have a chance to avoid miss
-			DamageEfficiency-=0.02*defender.getAgility();//Defender always have a chance to mitigate damage
+			DamageEfficiency*=1-0.002*defender.getAgility();//Defender always have a chance to mitigate damage
 	}
 	public void apply() {
 		if(miss) {
@@ -21,12 +21,13 @@ public class attack {
     	    System.out.print("\033[0;0m");	
 		}
 		else {
+    	    int damage=(int)((attacker.getWeaponDamage()+attacker.getStrength())*((double)100/(100+defender.getArmourDefend()))*this.DamageEfficiency);
     	    System.out.print("\033[0;31m");
     		System.out.print(attacker.getName()+" use the "+attacker.getWeapon()+" hitting "+defender.getName()+"'s "+bodyPart+", ");
     		if(DamageEfficiency>1) System.out.println("super effective!");
     		else System.out.println("not very effective...");
+    		System.out.println(defender.getName()+" has taken "+damage+" damages.");
     	    System.out.print("\033[0;0m");
-    	    int damage=(int)((attacker.getWeaponDamage()+attacker.getStrength())*((double)100/(100+defender.getArmourDefend()))*this.DamageEfficiency);
     	    defender.setHP(defender.getHP()-damage);
 		}
 	}

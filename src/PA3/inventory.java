@@ -51,4 +51,9 @@ public class inventory {
 	public boolean checkslot(int i) {
 		return (inv[i]!=null);
 	}
+	//Get spellbook from the inventory
+	public spellbook getSpellBook(){
+		spellbook spellBook=new spellbook(inv);
+		return spellBook;
+	}
 }

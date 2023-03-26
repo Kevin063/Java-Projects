@@ -10,10 +10,7 @@ public class globlin extends monster {
 		setStrength(20);
 		setDexterity(20);
 		setAgility(20);
+		setValue(200);
 		refresh();
 	}
-	public int getvalue() {
-		return 100;
-	}
-
 }
