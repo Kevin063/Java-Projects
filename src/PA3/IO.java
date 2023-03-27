@@ -28,7 +28,7 @@ public interface IO {
 		 System.out.flush();  
 	 }
 //Helper function for resetting color
-	 public static void reserColor() {
+	 public static void resetColor() {
 		 System.out.print("\033[0;0m");
 	 }
 //Helper function for coloring blue

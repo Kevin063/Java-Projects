@@ -12,7 +12,7 @@ public class player {
 		if (bestscore<score) bestscore=score;
 	}
 	public void printplayer(){
-		System.out.print("║   "+this.surname+String.format("%"+(11-this.surname.length())+"s", "")+"║       "+this.bestscore+String.format("%"+(11-Math.log10(bestscore+1))+"s", "")+"║\n");
+		System.out.print("║   "+this.surname+String.format("%"+(11-this.surname.length())+"s", "")+"║       "+this.bestscore+String.format("%"+(11-(int)Math.log10(bestscore+1))+"s", "")+"║\n");
 	}
 	public int getbestscore() {
 		return this.bestscore;

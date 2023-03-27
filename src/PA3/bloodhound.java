@@ -2,7 +2,7 @@ package PA3;
 
 public class bloodhound extends hero {
 	public bloodhound() {
-		setName("revenant");
+		setName("Blood Hound");
 		setMaxHP(400);
 		setMaxMP(300);
 		setLevel(1);

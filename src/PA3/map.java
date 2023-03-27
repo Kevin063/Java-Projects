@@ -79,16 +79,16 @@ public class map {
 	    int inChar;
 	    System.out.println("Enter a map number to start the game");
 	    IO.setGreen();
-	    System.out.println("1. Olympus");
-	    IO.reserColor();
+	    System.out.println("1. Olympus (Normal)");
+	    IO.resetColor();
 	    System.out.println("[Olympus is a peaceful city with adventurers and monsters. There's room to grow and thrive, but it's still a dangerous WORLD.]");
 	    IO.setYellow();
-	    System.out.println("2. Kings Canyon");
-	    IO.reserColor();
+	    System.out.println("2. Kings Canyon (Hard)");
+	    IO.resetColor();
 	    System.out.println("[Covered by countless rock roofs, adventurers come to Kings Canyon for treasures and golds.]");
 	    IO.setRed();
-	    System.out.println("3. Strom Point");
-	    IO.reserColor();
+	    System.out.println("3. Strom Point (Mars)");
+	    IO.resetColor();
 	    System.out.println("[The strom point is designed to be unfair. Huge threats will crash upon you without mercy. Only for players who want to struggle to survive.]");
 		Scanner s=new Scanner(System.in);
 		String input=s.nextLine();
@@ -128,9 +128,9 @@ public class map {
 	switch(direction) {
 	case("W"):{
 		if(playerx==0||grids[playerx-1][playery]=='I') {
-		    System.out.print("\033[0;32m");
+		    IO.setYellow();
 			System.out.println("You cannot pass there!");
-		    System.out.print("\033[0;0m");
+		    IO.resetColor();
 			return false;
 		}
 		else {

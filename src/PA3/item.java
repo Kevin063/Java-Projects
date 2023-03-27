@@ -1,11 +1,11 @@
 package PA3;
 
-public class item {
+public abstract class item {
     protected String name;
     protected int value;
     protected String type;
     protected String description;
-    
+    protected boolean usable;
     //getter for name
     public String getName() {
         return name;
@@ -37,5 +37,13 @@ public class item {
     //Setter for description
     public void setDescription(String s) {
     	this.description=s;
+    }
+    //Getter for usable
+    public boolean getUsable() {
+    	return usable;
+    }
+    //Setter for usable
+    public void setUsable(boolean u) {
+    	this.usable=u;
     }
 }

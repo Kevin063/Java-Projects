@@ -3,7 +3,7 @@ package PA3;
 public class revenant extends hero {
 	private boolean deathrattle;
 	public revenant() {
-		setName("revenant");
+		setName("Revenant");
 		setMaxHP(500);
 		setMaxMP(300);
 		setLevel(1);

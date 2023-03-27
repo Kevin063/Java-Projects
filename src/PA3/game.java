@@ -7,12 +7,18 @@ public class game {
 	private map map;
 	private String player;
 	private hero[] heroes;
+	private boolean herobouns=false;
 	//Init a game and set name and map
 	public game() {
-		score=0;
 		gold=0;
 		this.player=this.readplayername();
 		this.map=map.readmap();
+		switch(map.getMaptype()) {
+		case("Olympus"): score=5000; break;
+		case("kingsCanyon"): score=10000; break;
+		case("StormPoint"): score=15000; break;
+		default: score=5000;
+		}
 		this.heroes=new hero[5];
 		this.heroes[0]=hero.readHero();
 	}
@@ -30,14 +36,15 @@ public class game {
         	System.out.print("\033[0;32m");
         	IO.pressEnterToContinue();
 		}
+		else score+=tutorial.getScorevalue();
 	    System.out.print("\033[0;0m");
 	    
 	    System.out.print("\033[0;32m");
 		System.out.println("Now that you have escaped from this prison guarded by goblins, a Bounty Hunter named Twisted Fate is willing to take risks with you, and you embark on a journey of adventure in "+this.map.getMaptype());
 		System.out.println("Twisted Fate has joined the team!");
 	    System.out.print("\033[0;0m");
+	    this.heroes[1]=new twistedfate();
 	    IO.pressEnterToContinue();
-	    map.printMap();
 		System.out.println(
 				"• W/w: move up\r\n"
 				+ "• A/a: move left\r\n"
@@ -49,6 +56,7 @@ public class game {
 				+ "• M/m: enter market");
 		boolean exit=false;
 		while(!exit) {
+			map.printMap();
 			System.out.println("Enter your hero team's action:");
 			Scanner s=new Scanner(System.in);
 			String input=s.nextLine();
@@ -68,6 +76,7 @@ public class game {
 	        case("i"):
 	        case("I"):{
 	        	hero h=chooseHero();
+	        	System.out.println("Your total score: "+this.score+".");
 	        	h.printStats();
 	        	IO.pressEnterToContinue();
 	        	break;
@@ -75,7 +84,7 @@ public class game {
 	        case("b"):
 	        case("B"):{
 	        	hero h=chooseHero();
-	        	h.getInv().printinventory();
+	        	h.getInv().open(h);
 	        	IO.pressEnterToContinue();
 	        	break;
 	        }
@@ -84,6 +93,7 @@ public class game {
 	        	if(map.marketcheck()) {
 	        	hero h=chooseHero();
 	        	map.getMarket().entermarket(map,h);
+	        	map.printMap();
 	        	IO.pressEnterToContinue();
 	        	break;
 	        	}
@@ -92,6 +102,7 @@ public class game {
 					IO.pressEnterToContinue();
 					continue;
 	        	}
+	        	
 	        }
 	        case("w"):
 	        case("W"):
@@ -108,6 +119,10 @@ public class game {
 	        			System.out.print("\033[0;0m");
 	        		}
 	        		else if(battlecheck()) {
+	        			IO.setRed();
+	        			System.out.println("You have encounter a group of monsters!");
+	        			IO.resetColor();
+	        			IO.pressEnterToContinue();
 	        			battle b=new battle(heroes,map, score);
 	        			if(!b.startRound()) {
 	        	        	exit=true;
@@ -118,6 +133,9 @@ public class game {
 	        	        	IO.pressEnterToContinue();
 	        	        	System.out.println("Your score has been saved, see you next time!");
 	        	        	System.out.print("\033[0;0m");
+	        			}
+	        			else {
+	        				score+=b.getScorevalue();
 	        			}
 	        		}
 	        	}
@@ -132,6 +150,7 @@ public class game {
 						+ "• D/d: move right\r\n"
 						+ "• Q/q: quit game\r\n"
 						+ "• I/i: show information\r\n"
+						+ "• B/b: check bag\r\n"
 						+ "• M/m: enter market");
 				IO.pressEnterToContinue();
 				continue;
@@ -152,9 +171,9 @@ public class game {
 		String name=s.nextLine();
 		return name;
 	}
-//Check whether meet a monster battle
+//Check whether meet a monster b	attle
 	public boolean battlecheck() {
-	if(map.getloc()==' ') {
+	if(map.getMarket()==null) {
 		double x=Math.random();
 		if(x<map.getmonsterindex()) {
 			return true;
@@ -184,6 +203,7 @@ public class game {
 			Scanner s=new Scanner(System.in);
 			System.out.println("Please choose a hero:");
 			showHero();
+			System.out.print("\n");
 			int input=0;
 			try
 			{
@@ -206,6 +226,17 @@ public class game {
 				else {
 					System.out.println("That position is empty in the hero list!");
 					return chooseHero();
+		}
+	}
+//Trigger for a new hero to join
+	public void checkBouns() {
+		if (score>6000&&!herobouns) {
+		    System.out.print("\033[0;32m");
+			System.out.println("Hearing your adventrue, a Bounty Hunter named Genshin is willing to take risks with you, and you embark on a journey of adventure in "+this.map.getMaptype());
+			System.out.println("Genshin has joined the team!");
+		    System.out.print("\033[0;0m");
+		    this.heroes[2]=new genshin();
+		    herobouns=true;
 		}
 	}
 }

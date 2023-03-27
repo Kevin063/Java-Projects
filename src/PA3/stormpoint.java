@@ -3,7 +3,7 @@ package PA3;
 public class stormpoint extends map{
 	public stormpoint(int width, int height) {
 		super(width,height);
-		this.maptype="stormpoint";
+		this.maptype="StormPoint";
 		this.width=width;
 		this.height=height;
 		this.battlesize=3;

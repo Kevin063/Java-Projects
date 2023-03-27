@@ -142,7 +142,7 @@ public abstract class hero extends character {
 	}
 	// Get the name for the weapon
 	public String getWeapon() {
-		if(this.armour==null) return "fist";
+		if(this.weapon==null) return "fist";
 		else return this.weapon.getName();
 	}
 	//Get the weapon damage

@@ -15,7 +15,7 @@ public class market {
 	public void printmarket() {
 		String frametop= 
 				"╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗\n"
-              + "║                                                                   Market                                   					 ║\n"
+              + "║                                                                  Market                                   					 ║\n"
               + "╠══════════════╦═══════════════════╦════════════════════════════════════════════════════════════════════════════════════════╦═══════════════════╣\n"
               + "║     Slot     ║       Item        ║                                     Description                                        ║       Price       ║ \n"
               + "╠══════════════╬═══════════════════╬════════════════════════════════════════════════════════════════════════════════════════╬═══════════════════╣\n";
@@ -35,13 +35,13 @@ public class market {
 	//Generate a message when player meet a market
 	public static String encounterMessage(map m) {
 		switch(m.getMaptype()) {
-		case("kingscanyon"):{
+		case("KingsCanyon"):{
 			return("You found a friendly settlement for an Imperial Expeditionary Stronghold.");
 		}
-		case("olympus"):{
+		case("Olympus"):{
 			return "At the end of the stone road, you find a village inhabited by humans. The residents warmly welcome you and are willing to trade with you.";
 		}
-		case("stormpoints"):{
+		case("StormPoint"):{
 			return "In the caverns of the Storm Peaks, you find a settlement inhabited by a tribe of dwarves.";
 		}
 		default: return "Your found a opened market.";
@@ -51,14 +51,15 @@ public class market {
 	public void entermarket(map m, hero h) {
 		IO.pressEnterToContinue();
 		printmarket();
+		shopping(h);
 	}
 	//Shopping at a market
 	public void shopping(hero h) {
 		Scanner s=new Scanner(System.in);
 		IO.setGreen();
-		System.out.println("You have "+h.getGold()+"Golds now.");
+		System.out.println("You have "+h.getGold()+" Golds now.");
 		IO.setBlue();
-		System.out.println("Enter the item slot that you want to buy:");
+		System.out.println("Enter the item slot that you want to buy, enter 0 to quit:");
 		int input=0;
 		try
 		{
@@ -72,6 +73,7 @@ public class market {
 			shopping(h);
 			return;
         }  
+		if(input==-1) return;
 		if(input<0){
 			System.out.println("Please input a vaild number!");
 			IO.clearconsole();
@@ -80,12 +82,32 @@ public class market {
 			return;
         } 
 			if(pool.inv[input]!=null) {
-				
+				if(pool.inv[input].getValue()>h.getGold()){
+					System.out.println("You don't have enough gold!");
+					IO.clearconsole();
+					IO.pressEnterToContinue();
+					shopping(h);
+					return;
+				}
+				else{
+					buy(h,pool.inv[input]);
+					pool.inv[input]=null;
+					shopping(h);
+				}
 			}
 			else {
 				System.out.println("That position is empty in the market");
+				IO.clearconsole();
+				IO.pressEnterToContinue();
 				shopping(h);
 				return;
 			}
+	}
+	public void buy(hero h, item i) {
+		IO.setBlue();
+		System.out.println("A "+i.getName()+" has been placed into "+h.getName()+"'s inventory.");
+		h.setGold(h.getGold()-i.getValue());
+		h.getItem(i);
+		IO.pressEnterToContinue();
 	}
 }

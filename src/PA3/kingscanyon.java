@@ -3,7 +3,7 @@ package PA3;
 public class kingscanyon extends map{
 	public kingscanyon(int width, int height) {
 		super(width,height);
-		this.maptype="kingsCanyon";
+		this.maptype="KingsCanyon";
 		this.width=width;
 		this.height=height;
 		this.battlesize=3;

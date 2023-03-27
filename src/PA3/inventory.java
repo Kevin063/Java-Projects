@@ -1,4 +1,7 @@
 package PA3;
+
+import java.util.Scanner;
+
 //Class for inventory
 public class inventory {
 	item[] inv;
@@ -26,7 +29,9 @@ public class inventory {
 			return true;
 		}
 		else {
+			IO.setRed();
 			System.out.println("No item in this inventory slot! Please specify a existing item.");
+			IO.resetColor();
 			return false;
 		}
 	}
@@ -65,6 +70,50 @@ public class inventory {
 		for(int i=0;i<5;i++) {
 			int rand=(int) (((int)1000*Math.random())%(pool.length));
 			putitem(pool[rand]);
+		}
+	}
+	//Open inventory
+	public void open(hero h) {
+		printinventory();
+		Scanner s=new Scanner(System.in);
+		System.out.println("Enter the item that you are using, enter 0 to quit spellbook:");
+		int input=0;
+		try
+		{
+			input=s.nextInt()-1;//The pos 1 is the index 0 in slots.
+		}
+        catch(Exception e)
+        {
+        	IO.setRed();
+			System.out.println("Please input a vaild number!");
+			IO.resetColor();
+			IO.clearconsole();
+			IO.pressEnterToContinue();
+			open(h);
+			return;
+        }
+		if(input<=-1) return ;
+		if(this.inv[input]==null) {
+			IO.setRed();
+			System.out.println("That position is empty in the hero's Inventory!");
+			IO.resetColor();
+			open(h);
+			return;
+		}
+		else {
+			if(!this.inv[input].getUsable()) {
+				IO.setRed();
+				System.out.println("It's not a usable item outside of battle!");
+				IO.resetColor();
+				IO.pressEnterToContinue();
+				open(h);
+				return;
+			}
+			else{
+				((usable)this.inv[input]).use();
+				open(h);
+				return;
+			}
 		}
 	}
 }

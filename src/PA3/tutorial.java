@@ -12,6 +12,7 @@ public class tutorial extends battle {
 		m.add(jailer1);
 		m.add(jailer2);
 		this.monster=m;
+		scorevalue=calculateScoreValue();
 		enterBattle(false,0);
 		enterBattle(false,1);
 	}

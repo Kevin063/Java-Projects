@@ -3,7 +3,7 @@ package PA3;
 public class olympus extends map{
 	public olympus(int width, int height) {
 		super(width,height);
-		this.maptype="olympus";
+		this.maptype="Olympus";
 		this.width=width;
 		this.height=height;
 		this.battlesize=3;

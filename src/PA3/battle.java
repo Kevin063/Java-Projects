@@ -1,6 +1,7 @@
 package PA3;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class battle {
 		this.heroes=new LinkedList<hero>(Arrays.asList(h));
 		monsterslot=new monster[size];
 		heroslot=new hero[size];
+		scorevalue=calculateScoreValue();
 		for (int i=0;i<size;i++) {
 			enterBattle(true,i);
 			enterBattle(false,i);
@@ -24,6 +26,7 @@ public class battle {
 	}
 	public battle(hero[] h, map m, int score) {
 		this(h, generateMonster(m, score), m.getBattlesize(), score);
+		this.map=map;
 	}
 	//Start a battleround
 	public boolean startRound() {
@@ -257,6 +260,28 @@ public class battle {
 	//Generate a group of monster, based on the game configs
 	public static LinkedList<monster> generateMonster(map m, int score){
 		LinkedList<monster> monsterlist=new LinkedList<monster>();
+		while(score>=2000) {
+			monster[]pool= {new globlin()};
+			int rand=(int)(Math.random()*100)%pool.length;
+			if(pool[rand].getvalue()*10>score) continue;//If the monster is too strong
+			else {
+				monsterlist.add(pool[rand]);
+				score-=pool[rand].getvalue()*10;
+			}
+		}
 		return monsterlist;
+	}
+	//Calculate the scorevalue for a battle
+	public int calculateScoreValue() {
+		Iterator<monster> it=this.monster.iterator();
+		int s=0;
+		while(it.hasNext()) {
+			s+=it.next().getvalue();
+		}
+		return s;
+	}
+	//Getter for scorevalue
+	public int getScorevalue() {
+		return this.scorevalue;
 	}
 }
