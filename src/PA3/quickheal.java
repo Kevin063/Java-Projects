@@ -7,6 +7,7 @@ public class quickheal extends spell {
 	setValue(50);
 	setCost(20);
 	setSpellType(true);
+	setDescription("A spell that rapidly restores health to the target.");
 	}
 	public void cast(character c){
 		int hp=c.getHP();

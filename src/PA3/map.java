@@ -78,17 +78,17 @@ public class map {
 		IO.clearconsole();
 	    int inChar;
 	    System.out.println("Enter a map number to start the game");
-	    System.out.print("\033[0;32m");
+	    IO.setGreen();
 	    System.out.println("1. Olympus");
-	    System.out.print("\033[0;0m");
+	    IO.reserColor();
 	    System.out.println("[Olympus is a peaceful city with adventurers and monsters. There's room to grow and thrive, but it's still a dangerous WORLD.]");
-	    System.out.print("\033[0;33m");
+	    IO.setYellow();
 	    System.out.println("2. Kings Canyon");
-	    System.out.print("\033[0;0m");
+	    IO.reserColor();
 	    System.out.println("[Covered by countless rock roofs, adventurers come to Kings Canyon for treasures and golds.]");
-	    System.out.print("\033[0;31m");
+	    IO.setRed();
 	    System.out.println("3. Strom Point");
-	    System.out.print("\033[0;0m");
+	    IO.reserColor();
 	    System.out.println("[The strom point is designed to be unfair. Huge threats will crash upon you without mercy. Only for players who want to struggle to survive.]");
 		Scanner s=new Scanner(System.in);
 		String input=s.nextLine();
@@ -197,12 +197,24 @@ public class map {
 	default: return false;
 	}
 	}
+	//Check whether at a market
+	public boolean marketcheck() {
+	if(globalmarket[playerx][playery]!=null) {
+			return true;
+		}
+	return false;
+	}
 	public double getmonsterindex() {
 		return monsterindex;
 	}
 	public char getloc() {
 		return grids[playerx][playery];
 	}
+	//Get the market standing on
+	public market getMarket() {
+		return globalmarket[playerx][playery];
+	}
+	//Get the maptype
 	public String getMaptype() {
 		return maptype;
 	}

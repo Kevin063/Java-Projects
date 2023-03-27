@@ -2,6 +2,7 @@ package PA3;
 //Subclass for a circle map, the map is surrounded by Inaccessible spaces
 public class stormpoint extends map{
 	public stormpoint(int width, int height) {
+		super(width,height);
 		this.maptype="stormpoint";
 		this.width=width;
 		this.height=height;
@@ -20,6 +21,7 @@ public class stormpoint extends map{
 		this.playerx=(height-1)/2;
 		this.playery=(width-1)/2;
 		grids[playerx][playery]='P';
+		generateMarket();
 	}
 	public stormpoint() {
 		this(15,15);

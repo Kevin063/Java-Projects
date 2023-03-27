@@ -103,6 +103,18 @@ public abstract class hero extends character {
 	    System.out.printf("| %-10s: %10s |\n", "Armour", armour == null ? "Unequiped" : armour.getName());
 	    System.out.println("+------------------------+");
 	}
+	//Give an item to the hero
+	public void getItem(item i) {
+		this.getInv().putitem(i);
+	}
+	//Equip a weapon
+	public void equipWeapon(weapon w) {
+		this.weapon=w;
+	}
+	//Equip a armour
+	public void equipArmour(armour a) {
+		this.armour=a;
+	}
 	// Getter and setter for gold
 	public int getGold() {
 	    return gold;

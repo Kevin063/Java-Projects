@@ -27,4 +27,24 @@ public interface IO {
 		 System.out.println(new String(new char[3]).replace("\0", "\r\n"));
 		 System.out.flush();  
 	 }
+//Helper function for resetting color
+	 public static void reserColor() {
+		 System.out.print("\033[0;0m");
+	 }
+//Helper function for coloring blue
+	 public static void setBlue() {
+		 System.out.print("\033[0;34m");
+	 }
+//Helper function for coloring green
+	 public static void setGreen() {
+		 System.out.print("\033[0;32m");
+	 }
+//Helper function for coloring yellow
+	 public static void setYellow() {
+		 System.out.print("\033[0;33m");
+	 }
+//Helper function for coloring yellow
+	 public static void setRed() {
+		 System.out.print("\033[0;31m");
+	 }
 }

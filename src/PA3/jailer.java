@@ -3,6 +3,7 @@ package PA3;
 public class jailer extends globlin {
 	public jailer(){
 		super();
+		setName("Jailer");
 		setMaxHP(30);
 		setAgility(80);
 		refresh();

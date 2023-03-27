@@ -30,19 +30,22 @@ public class inventory {
 			return false;
 		}
 	}
+	//Print a hero's inventory
 	public void printinventory() {
 		String frametop= 
-				 "╔══════════════════════════════════╗\n"
-              + "║           Leaderboard            ║\n"
-              + "╠══════════════╦═══════════════════╣\n"
-              + "║     Slot     ║       Item        ║\n"
-              + "╠══════════════╬═══════════════════╣\n";
-		String framebot="╚══════════════╩═══════════════════╝";
+				"╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗\n"
+              + "║                                                            Inventory                                                      ║\n"
+              + "╠══════════════╦═══════════════════╦════════════════════════════════════════════════════════════════════════════════════════╣\n"
+              + "║     Slot     ║       Item        ║                                     Description                                        ║\n"
+              + "╠══════════════╬═══════════════════╬════════════════════════════════════════════════════════════════════════════════════════╣\n";
+		String framebot=
+				"╚══════════════╩═══════════════════╩════════════════════════════════════════════════════════════════════════════════════════╝";
 		System.out.print(frametop);
 		for(int i=0;i<capacity;i++) {
 			if(inv[i]!=null) {
-				System.out.print("║   "+(i+1)+String.format("%"+(11-Math.log10(i+1))+"s", "")+
-						"║       "+inv[i].getName()+String.format("%"+(11-inv[i].getName().length())+"s", "")+"║\n");
+				System.out.print("║       " + (i+1) + String.format("%"+(6-(int)Math.log10(i+2))+"s", "") +
+		                   "║       " + inv[i].getName()+ String.format("%"+(12-(inv[i].getName().length()))+"s", "") +
+		                   "║ " + inv[i].getDescription() + String.format("%"+(87-inv[i].getDescription().length())+"s", "") + "║\n");
 			}
 		}
 		System.out.println(framebot);
@@ -55,5 +58,13 @@ public class inventory {
 	public spellbook getSpellBook(){
 		spellbook spellBook=new spellbook(inv);
 		return spellBook;
+	}
+	//Fill the inventory with random items, used for market pool
+	public void fillInv() {
+		item[] pool= {new quickheal()};
+		for(int i=0;i<5;i++) {
+			int rand=(int) (((int)1000*Math.random())%(pool.length));
+			putitem(pool[rand]);
+		}
 	}
 }

@@ -3,7 +3,7 @@ package PA3;
 public class globlin extends monster {
 
 	public globlin() {
-		setName("globlin");
+		setName("Globlin");
 		setMaxHP(100);
 		setMaxMP(0);
 		setLevel(1);

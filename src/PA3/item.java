@@ -4,6 +4,8 @@ public class item {
     protected String name;
     protected int value;
     protected String type;
+    protected String description;
+    
     //getter for name
     public String getName() {
         return name;
@@ -27,5 +29,13 @@ public class item {
     //setter for type
     public void setType(String type) {
         this.type = type;
+    }
+    //getter for description
+    public String getDescription() {
+    	return this.description;
+    }
+    //Setter for description
+    public void setDescription(String s) {
+    	this.description=s;
     }
 }

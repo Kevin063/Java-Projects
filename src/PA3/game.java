@@ -45,6 +45,7 @@ public class game {
 				+ "• D/d: move right\r\n"
 				+ "• Q/q: Back to the mainpage\r\n"
 				+ "• I/i: show information\r\n"
+				+ "• B/b: check bag\r\n"
 				+ "• M/m: enter market");
 		boolean exit=false;
 		while(!exit) {
@@ -64,6 +65,34 @@ public class game {
 	        	IO.pressEnterToContinue();
 	        	break;
 	        }
+	        case("i"):
+	        case("I"):{
+	        	hero h=chooseHero();
+	        	h.printStats();
+	        	IO.pressEnterToContinue();
+	        	break;
+	        }
+	        case("b"):
+	        case("B"):{
+	        	hero h=chooseHero();
+	        	h.getInv().printinventory();
+	        	IO.pressEnterToContinue();
+	        	break;
+	        }
+	        case("m"):
+	        case("M"):{
+	        	if(map.marketcheck()) {
+	        	hero h=chooseHero();
+	        	map.getMarket().entermarket(map,h);
+	        	IO.pressEnterToContinue();
+	        	break;
+	        	}
+	        	else {
+					System.out.println("No market is found at the current location!");
+					IO.pressEnterToContinue();
+					continue;
+	        	}
+	        }
 	        case("w"):
 	        case("W"):
 	        case("a"):
@@ -73,7 +102,7 @@ public class game {
 	        case("d"):
 	        case("D"):{
 	        	if(map.move(input.toUpperCase())) {
-	        		if(marketcheck()) {
+	        		if(map.marketcheck()) {
 	        			System.out.print("\033[0;32m");
 	        			System.out.println(market.encounterMessage(map));
 	        			System.out.print("\033[0;0m");
@@ -97,13 +126,14 @@ public class game {
 	        default:{
 				System.out.println("Please input a valid action, below is the supported input!");
 				System.out.println(
-						"W/w: move up\r\n"
+						"• W/w: move up\r\n"
 						+ "• A/a: move left\r\n"
 						+ "• S/s: move down\r\n"
 						+ "• D/d: move right\r\n"
 						+ "• Q/q: quit game\r\n"
 						+ "• I/i: show information\r\n"
 						+ "• M/m: enter market");
+				IO.pressEnterToContinue();
 				continue;
 	        }
 	        }  
@@ -132,11 +162,50 @@ public class game {
 	}
 	return false;
 	}
-//Check whether enter a market
-	public boolean marketcheck() {
-	if(map.getloc()=='M') {
-			return true;
+//Let players to show a hero list
+	public void showHero() {
+		String frametop= 
+				  "╔══════════════════════════════════╗\n"
+              + "║              Heroes              ║\n"
+              + "╠══════════════╦═══════════════════╣\n"
+              + "║     Slot     ║       Name        ║\n"
+              + "╠══════════════╬═══════════════════╣\n";
+		String framebot="╚══════════════╩═══════════════════╝";
+		System.out.print(frametop);
+		for(int i=0;i<heroes.length;i++) {
+			if (heroes[i]==null) break;
+			System.out.print("║      "+(i+1)+String.format("%"+(7)+"s", "")+"║    "+heroes[i].getName()+String.format("%"+(15-heroes[i].getName().length())+"s", "")+"║\n");
 		}
-	return false;
+		System.out.print(framebot);
+		
+	}
+//Let players to choose a hero from list
+	public hero chooseHero() {
+			Scanner s=new Scanner(System.in);
+			System.out.println("Please choose a hero:");
+			showHero();
+			int input=0;
+			try
+			{
+				input=s.nextInt()-1;//The pos 1 is the index 0 in slots.
+			}
+	        catch(Exception e)
+	        {
+				System.out.println("Please input a vaild number!");
+				IO.clearconsole();
+				IO.pressEnterToContinue();
+				return chooseHero();
+	        }  
+			if(input<0){
+				System.out.println("Please input a vaild number!");
+				IO.clearconsole();
+				IO.pressEnterToContinue();
+				return chooseHero();
+	        } 
+				if(heroes[input]!=null) return heroes[input];
+				else {
+					System.out.println("That position is empty in the hero list!");
+					return chooseHero();
+		}
 	}
 }
