@@ -17,6 +17,7 @@ public class attack {
 	public void apply() {
 		if(miss) {
     	    System.out.print("\033[0;31m");
+    	    sound.playSound("sounds/miss.wav");
     		System.out.println(attacker.getName()+" attempt to use the "+attacker.getWeapon()+" hitting "+defender.getName()+"'s "+bodyPart+", but miss.");
     	    System.out.print("\033[0;0m");	
 		}
@@ -26,6 +27,7 @@ public class attack {
     		System.out.print(attacker.getName()+" use the "+attacker.getWeapon()+" hitting "+defender.getName()+"'s "+bodyPart+", ");
     		if(DamageEfficiency>1) System.out.println("super effective!");
     		else System.out.println("not very effective...");
+    		sound.playSound("sounds/hit.wav");
     		System.out.println(defender.getName()+" has taken "+damage+" damages.");
     	    System.out.print("\033[0;0m");
     	    defender.setHP(defender.getHP()-damage);

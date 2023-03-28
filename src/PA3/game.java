@@ -151,6 +151,7 @@ public class game {
 	        case("d"):
 	        case("D"):{
 	        	if(map.move(input.toUpperCase())) {
+	        		sound.playSound("sounds/move.wav");
 	        		if(map.marketcheck()) {
 	        			System.out.print("\033[0;32m");
 	        			System.out.println(market.encounterMessage(map));
@@ -269,7 +270,7 @@ public class game {
 	}
 //Trigger for a new hero to join
 	public void checkBouns() {
-		if (score>1000&&!herobouns) {
+		if (score>20000&&!herobouns) {
 		    System.out.print("\033[0;32m");
 			System.out.println("Hearing your adventrue, a Bounty Hunter named Genshin is willing to take risks with you, and you embark on a journey of adventure in "+this.map.getMaptype());
 			System.out.println("Genshin has joined the team!");
@@ -280,7 +281,7 @@ public class game {
 	}
 //Trigger for the final boss battle
 	public void checkBoss() {
-		if (score>30000&&!boss) {
+		if (score>50000&&!boss) {
 			boss=true;
 		}
 	}

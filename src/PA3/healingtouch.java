@@ -3,7 +3,7 @@ package PA3;
 public class healingtouch extends spell {
 	healingtouch(){
 	super();
-	setName("Healing Touch");
+	setName("HealingTouch");
 	setValue(200);
 	setCost(150);
 	setSpellType(true);

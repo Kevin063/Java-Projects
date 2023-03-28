@@ -43,7 +43,6 @@ public class mainpage {
 
     	IO.clearconsole();
 		System.out.println(welcomeMsg);
-//		IO.playSound("sounds/gamestart.wav");
 		readmainpage(lb);
 	}
 	//Read input to choose a mainpage action
@@ -55,6 +54,7 @@ public class mainpage {
 			System.out.flush();
 	        switch(input) {
 	        case("1"):{
+	        	sound.playSound("sounds/gamestart.wav");
 	        	game g=new game();
 	        	g.play(lb);
 	        	IO.clearconsole();
@@ -64,6 +64,7 @@ public class mainpage {
 	        	break;
 	        }
 	        case("2"):{
+	        	sound.playSound("sounds/leaderboard.wav");
 	        	IO.clearconsole();
 	        	lb.printleaderboard();
 	        	IO.pressEnterToContinue();

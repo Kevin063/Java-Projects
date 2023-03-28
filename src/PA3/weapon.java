@@ -25,6 +25,7 @@ public class weapon extends item {
 	}
 	//Equip this
 	public void use(hero h) {
+		System.out.println(h.getName()+" equips "+this.getName()+".");
 		h.equipWeapon(this);
 	}
 }

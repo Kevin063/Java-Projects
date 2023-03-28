@@ -1,5 +1,5 @@
 package PA3;
-
+//Class for a spell book in inventory
 import java.util.Scanner;
 
 public class spellbook extends inventory {

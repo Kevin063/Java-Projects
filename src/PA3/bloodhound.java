@@ -1,5 +1,5 @@
 package PA3;
-
+//The class for hero bloodhound
 public class bloodhound extends hero {
 	ravensbite r;
 	public bloodhound() {
@@ -40,6 +40,7 @@ public class bloodhound extends hero {
 		System.out.println("All HP and MP are restored!");
 		this.r.upgrade();
 		System.out.println("Hero "+this.getName()+", as well as his Raven's Bite, has upgraded to level "+this.getLevel()+"!");
+		sound.playSound("sounds/bloodhound_levelup.wav");
 		IO.resetColor();
 	}
 	public void equipweapon() {

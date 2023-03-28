@@ -1,5 +1,5 @@
 package PA3;
-
+//Class for performing a battle
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -26,7 +26,7 @@ public class battle {
 	}
 	public battle(hero[] h, map m, int score) {
 		this(h, generateMonster(m, score), m.getBattlesize(), score);
-		this.map=map;
+		this.map=m;
 	}
 	//Start a battleround
 	public boolean startRound() {
@@ -248,6 +248,7 @@ public class battle {
 		            return false;
 		        }
 		    }
+		    sound.playSound("sounds/lose.wav");
 		    System.out.println("Everyone is dead or gone. This story is over.");
 		    return true;
 		}

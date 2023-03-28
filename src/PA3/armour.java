@@ -1,5 +1,5 @@
 package PA3;
-
+//
 public abstract class armour extends item implements usable{
 	protected int defend;
 	protected int agilityModifier;
@@ -25,6 +25,7 @@ public abstract class armour extends item implements usable{
 		this.agilityModifier=a;
 		}
 	public void use(hero h) {
+		System.out.println(h.getName()+" equips "+this.getName()+".");
 		h.equipArmour(this);
 	}
 }

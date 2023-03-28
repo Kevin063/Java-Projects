@@ -2,7 +2,7 @@ package PA3;
 
 import java.util.Scanner;
 
-//Class for inventory
+//Class for inventory and display
 public class inventory {
 	item[] inv;
 	int capacity=100;//Default max item number

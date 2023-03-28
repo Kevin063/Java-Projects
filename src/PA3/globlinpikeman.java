@@ -2,7 +2,7 @@ package PA3;
 
 public class globlinpikeman extends globlin {
 	public globlinpikeman() {
-		setName("Globlin Pikeman");
+		setName("Glo Pikeman");
 		setMaxHP(100);
 		setMaxMP(0);
 		setLevel(0);

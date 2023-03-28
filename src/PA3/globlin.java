@@ -1,5 +1,5 @@
 package PA3;
-//The weakest monster
+//The weakest monster and have variants
 public class globlin extends monster {
 	public globlin() {
 		setName("Globlin");

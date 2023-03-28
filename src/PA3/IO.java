@@ -1,5 +1,5 @@
 package PA3;
-//Abstract class for handing user interactions and generate outputs, supporting mutiple classes
+//Interface for handing user interactions and generate outputs, supporting mutiple classes
 import java.io.*;
 import java.util.Scanner;
 

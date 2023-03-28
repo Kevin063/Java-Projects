@@ -19,7 +19,7 @@ public class twistedfate extends hero {
 	public void earnGold(int gold) {
 		int amount=(int)(Math.random()*100);
 		IO.setYellow();
-		System.out.println("Twisted Fate rolls his lead dice and extra "+amount+" Golds.");
+		System.out.println("Twisted Fate rolls his lead dice and get extra "+amount+" Golds.");
 		IO.resetColor();
 		this.gold+=gold+amount;
 	}

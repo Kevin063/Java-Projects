@@ -66,14 +66,17 @@ public abstract class hero extends character {
         switch(input) {
         case("1"):{
         	h=new pathfinder();
+        	sound.playSound("sounds/pathfinder_ready.wav");
         	break;
         }
         case("2"):{
         	h=new revenant();
+        	sound.playSound("sounds/reveant_ready.wav");
         	break;
         	}
         case("3"):{
         	h=new bloodhound();
+        	sound.playSound("sounds/bloodhound_ready.wav");
         	break;
         }
         default:{

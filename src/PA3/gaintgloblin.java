@@ -2,7 +2,7 @@ package PA3;
 
 public class gaintgloblin extends globlin{
 	public gaintgloblin() {
-		setName("Gaint Globlin");
+		setName("GaintGloblin");
 		setMaxHP(200);
 		setMaxMP(0);
 		setLevel(5);

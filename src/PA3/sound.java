@@ -1,5 +1,5 @@
 package PA3;
-
+//Interface for playing game sounds
 import java.io.File;
 import java.io.IOException;
 
@@ -9,8 +9,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-//Class for playing game sounds
-public class sound {
+public interface sound {
 	//Helper function to play a sound
 		 public static void playSound(String soundFile) {
 			    File f = new File("./" + soundFile);
