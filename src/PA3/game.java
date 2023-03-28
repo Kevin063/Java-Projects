@@ -7,10 +7,13 @@ public class game {
 	private map map;
 	private String player;
 	private hero[] heroes;
-	private boolean herobouns=false;
+	private boolean herobouns;
+	private boolean boss;
 	//Init a game and set name and map
 	public game() {
 		gold=0;
+		herobouns=false;
+		boss=false;
 		this.player=this.readplayername();
 		this.map=map.readmap();
 		switch(map.getMaptype()) {
@@ -57,6 +60,41 @@ public class game {
 		boolean exit=false;
 		while(!exit) {
 			map.printMap();
+			checkBouns();
+			checkBoss();
+			if (boss) {
+			    IO.setRed();
+				System.out.println("!!!!!!");
+				System.out.println("The final boss has arrive!");
+			    IO.resetColor();
+			    battle boss=new finalboss(heroes);
+    			if(!boss.startRound()) {
+    	        	exit=true;
+    	        	IO.setRed();
+    	        	System.out.println("Your heroes didn't defeat the Mecha:PRIME Warick. Maybe another group of adventures might finish your incomplete dream today.");
+    	        	IO.resetColor();
+    	        	IO.pressEnterToContinue();
+    	        	lb.recordwinner(player, score);
+    	        	lb.saveleaderboard();
+    	        	IO.clearconsole();
+    	        	IO.setGreen();
+    	        	IO.pressEnterToContinue();
+    	        	System.out.println("Your score has been saved, see you next time!");
+    	        	IO.resetColor();
+    	        	break;
+    			}
+    			else {
+    				exit=true;
+    				IO.setGreen();
+    				System.out.println("Congratulations! You have defeated the Mecha:PRIME Warick. Your adventrue will be remembered by everyone in "+map.getMaptype()+".");
+    				IO.pressEnterToContinue();
+    				lb.recordwinner(player, score);
+    	        	lb.saveleaderboard();
+    	        	System.out.println("Your score has been saved, see you next time!");
+    	        	IO.resetColor();
+    	        	break;
+    			}
+			}
 			System.out.println("Enter your hero team's action:");
 			Scanner s=new Scanner(System.in);
 			String input=s.nextLine();
@@ -141,6 +179,7 @@ public class game {
 	        	}
 	        	break;
 	        	}
+	        case("Boss"): boss=true; break;//Used for testing boss battle 
 	        default:{
 				System.out.println("Please input a valid action, below is the supported input!");
 				System.out.println(
@@ -230,7 +269,7 @@ public class game {
 	}
 //Trigger for a new hero to join
 	public void checkBouns() {
-		if (score>6000&&!herobouns) {
+		if (score>1000&&!herobouns) {
 		    System.out.print("\033[0;32m");
 			System.out.println("Hearing your adventrue, a Bounty Hunter named Genshin is willing to take risks with you, and you embark on a journey of adventure in "+this.map.getMaptype());
 			System.out.println("Genshin has joined the team!");
@@ -239,4 +278,11 @@ public class game {
 		    herobouns=true;
 		}
 	}
+//Trigger for the final boss battle
+	public void checkBoss() {
+		if (score>30000&&!boss) {
+			boss=true;
+		}
+	}
+	
 }

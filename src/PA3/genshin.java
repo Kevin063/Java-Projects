@@ -13,5 +13,11 @@ public class genshin extends hero {
 	setExp(0);
 	setInv(new inventory());
 	refresh();
+	//Deafult items: meteorite, pumpshotgun
+	this.getItem(new meteorite());
+	weapon w=new pumpshotgun();
+	this.getItem(w);
+	this.equipWeapon(w);
+	
 	}
 }

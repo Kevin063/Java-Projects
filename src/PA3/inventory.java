@@ -66,7 +66,9 @@ public class inventory {
 	}
 	//Fill the inventory with random items, used for market pool
 	public void fillInv() {
-		item[] pool= {new quickheal()};
+		item[] pool= {new flakjacket(),new flakvest(),new marinearmour(),new platearmour()
+				,new fireball(),new frostnova(),new quickheal(),new healingtouch(),new meteorite()
+				,new autopistol(),new breachaxe(),new pickaxe(),new pumpshotgun(),new sniperrifle()};
 		for(int i=0;i<5;i++) {
 			int rand=(int) (((int)1000*Math.random())%(pool.length));
 			putitem(pool[rand]);
@@ -110,7 +112,8 @@ public class inventory {
 				return;
 			}
 			else{
-				((usable)this.inv[input]).use();
+				((usable)this.inv[input]).use(h);
+				this.inv[input]=null;
 				open(h);
 				return;
 			}

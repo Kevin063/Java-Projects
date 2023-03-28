@@ -1,9 +1,9 @@
 package PA3;
-
+//A spell that rapidly restores health to the target.
 public class quickheal extends spell {
 	quickheal(){
 	super();
-	setName("quickHeal");
+	setName("QuickHeal");
 	setValue(50);
 	setCost(20);
 	setSpellType(true);

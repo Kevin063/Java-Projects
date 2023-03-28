@@ -67,21 +67,21 @@ public class battle {
 				if (winCheck(true)) return false;
 		}
 		}
-		IO.pressEnterToContinue();
 		return startRound();
 	}
 	//Read action for a hero
 	public void heroAction(hero h) {
 		IO.clearconsole();
 		System.out.println(
-				"• A: Attack a monster\r\n"
-				+ "• S: Check your spellbook\r\n"
-				+ "• R: Rest for the turn\r\n"
-				+ "• E: Try to escape from the battle\r\n"
-				+ "• I: show information");
+				"• a/A: Attack a monster\r\n"
+				+ "• s/S: Check your spellbook\r\n"
+				+ "• r/R: Rest for the turn\r\n"
+				+ "• e/E: Try to escape from the battle\r\n"
+				+ "• i/I: show information");
 		Scanner s=new Scanner(System.in);
 		String input=s.nextLine();
         switch(input) {
+        case("a"):
         case("A"):{
         	int pos=readTarget(false);
         	monster target=monsterslot[pos];
@@ -99,6 +99,7 @@ public class battle {
         	}
         	break;
         }
+        case("s"):
         case("S"):{
         	spell sp=h.getInv().getSpellBook().openBook(h);
         			if(sp==null) heroAction(h);//If quit spellbook
@@ -114,12 +115,14 @@ public class battle {
         			}
         	break;
         	}
+        case("r"):
         case("R"):{
     	    System.out.print("\033[0;32m");
     		System.out.println(h.getName()+" has taken a rest.");
     	    System.out.print("\033[0;0m");	
         	break;
         }
+        case("e"):
         case("E"):{
         	if(Math.random()<this.map.getEscapeChance()) {
         	    escape=true;
@@ -134,6 +137,7 @@ public class battle {
         	}
         	break;
         }
+        case("i"):
         case("I"):{
         	showStats();
         	heroAction(h);
@@ -261,7 +265,7 @@ public class battle {
 	public static LinkedList<monster> generateMonster(map m, int score){
 		LinkedList<monster> monsterlist=new LinkedList<monster>();
 		while(score>=2000) {
-			monster[]pool= {new globlin()};
+			monster[]pool= {new globlin(),new globlinpikeman(),new gaintgloblin(),new lancer(),new centipede(), new scyther()};
 			int rand=(int)(Math.random()*100)%pool.length;
 			if(pool[rand].getvalue()*10>score) continue;//If the monster is too strong
 			else {

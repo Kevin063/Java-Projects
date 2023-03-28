@@ -3,9 +3,10 @@ package PA3;
 public class lancer extends mechanoid {
 	public lancer() {
 		super();
+		setName("Lancer");
 		setStrength(30);
 		setDexterity(30);
-		setAgility(4);
+		setAgility(40);
 		
 	}
 	public String getWeapon() {

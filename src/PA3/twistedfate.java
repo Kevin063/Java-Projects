@@ -12,6 +12,7 @@ public class twistedfate extends hero {
 	setGold(1000);
 	setExp(0);
 	setInv(new inventory());
+	this.getItem(armour);
 	refresh();
 	}
 	//Earn gold and roll a dice

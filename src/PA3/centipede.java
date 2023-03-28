@@ -1,9 +1,10 @@
 package PA3;
-//Heavy combat 
+//Heavy combat platform
 public class centipede extends mechanoid{
 	public centipede() {
 		super();
-		setStrength(50);
+		setName("Centipede");
+		setStrength(80);
 		setDexterity(20);
 		setAgility(0);
 		

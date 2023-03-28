@@ -13,9 +13,13 @@ public class revenant extends hero {
 		setGold(0);
 		setExp(0);
 		setInv(new inventory());
+		//Deafult items: flakjacket,pickaxe
+		armour a=new flakjacket();
+		this.getItem(a);
+		this.equipArmour(a);
 		weapon w=new pickaxe();
-		getItem(w);
-		equipWeapon(w);
+		this.getItem(w);
+		this.equipWeapon(w);
 		refresh();
 	}
 	//check whether the character is killed, Revenant can immune death once.

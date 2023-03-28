@@ -29,8 +29,11 @@ public abstract class hero extends character {
 		setStrength((int)(getStrength()*(1+0.1*Math.random())));
 		setDexterity((int)(getDexterity()*(1+0.1*Math.random())));
 		setAgility((int)(getAgility()*(1+0.1*Math.random())));
-		refresh();
+		IO.setGreen();
 		System.out.println("Hero "+this.getName()+" has upgraded to level "+this.getLevel()+"!");
+		System.out.println("All HP and MP are restored!");
+		refresh();
+		IO.resetColor();
 	}
 	//Read the starting hero from the player
 	public static hero readHero() {
@@ -85,23 +88,23 @@ public abstract class hero extends character {
 	}
 	//Class for displaying a hero's stats
 	public void printStats() {
-	    System.out.println("+------------------------+");
-	    System.out.println("|    Hero Information    |");
-	    System.out.println("+------------------------+");
-	    System.out.printf("| %-10s: %10s |\n", "Name", name);
-	    System.out.printf("| %-10s: %10d |\n", "Level", level);
-	    System.out.printf("| %-10s: %10d |\n", "Max HP", maxHP);
-	    System.out.printf("| %-10s: %10d |\n", "Max MP", maxMP);
-	    System.out.printf("| %-10s: %10d |\n", "HP", HP);
-	    System.out.printf("| %-10s: %10d |\n", "MP", MP);
-	    System.out.printf("| %-10s: %10d |\n", "Strength", strength);
-	    System.out.printf("| %-10s: %10d |\n", "Dexterity", dexterity);
-	    System.out.printf("| %-10s: %10d |\n", "Agility", agility);
-	    System.out.printf("| %-10s: %10d |\n", "Gold", gold);
-	    System.out.printf("| %-10s: %10d |\n", "Experience", exp);
-	    System.out.printf("| %-10s: %10s |\n", "Weapon", weapon == null ? "Unequiped" : weapon.getName());
-	    System.out.printf("| %-10s: %10s |\n", "Armour", armour == null ? "Unequiped" : armour.getName());
-	    System.out.println("+------------------------+");
+	    System.out.println("+----------------------------+");
+	    System.out.println("|      Hero Information      |");
+	    System.out.println("+----------------------------+");
+	    System.out.printf("| %-12s: %12s |\n", "Name", name);
+	    System.out.printf("| %-12s: %12d |\n", "Level", level);
+	    System.out.printf("| %-12s: %12d |\n", "Max HP", maxHP);
+	    System.out.printf("| %-12s: %12d |\n", "Max MP", maxMP);
+	    System.out.printf("| %-12s: %12d |\n", "HP", HP);
+	    System.out.printf("| %-12s: %12d |\n", "MP", MP);
+	    System.out.printf("| %-12s: %12d |\n", "Strength", strength);
+	    System.out.printf("| %-12s: %12d |\n", "Dexterity", dexterity);
+	    System.out.printf("| %-12s: %12d |\n", "Agility", agility);
+	    System.out.printf("| %-12s: %12d |\n", "Gold", gold);
+	    System.out.printf("| %-12s: %12d |\n", "Experience", exp);
+	    System.out.printf("| %-12s: %12s |\n", "Weapon", weapon == null ? "Unequiped" : weapon.getName());
+	    System.out.printf("| %-12s: %12s |\n", "Armour", armour == null ? "Unequiped" : armour.getName());
+	    System.out.println("+----------------------------+");
 	}
 	//Give an item to the hero
 	public void getItem(item i) {

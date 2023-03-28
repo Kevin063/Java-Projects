@@ -4,6 +4,7 @@ public class weapon extends item {
 	protected int damage;
 	protected int dexterityModifier;
 	protected weapon() {
+		setUsable(true);
 		setType("weapon");
 	}
 	//Getter for damage
@@ -21,5 +22,9 @@ public class weapon extends item {
 	//Setter for dex moder
 	public void setDexterityModifier(int d) {
 	dexterityModifier=d;
+	}
+	//Equip this
+	public void use(hero h) {
+		h.equipWeapon(this);
 	}
 }

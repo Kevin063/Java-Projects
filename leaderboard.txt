@@ -2,5 +2,7 @@ ads;0
 q;5000
 ASD;5400
 HK;0
+asd;5000
 sad;5000
+DAS;5000
 LSD;0

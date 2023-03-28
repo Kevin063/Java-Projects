@@ -1,7 +1,6 @@
 package PA3;
 //The weakest monster
 public class globlin extends monster {
-
 	public globlin() {
 		setName("Globlin");
 		setMaxHP(100);
